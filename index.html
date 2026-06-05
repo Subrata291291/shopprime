@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopPrime Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <header class="position-sticky top-0">
+      <nav class="navbar navbar-expand-lg navbar-dark top-nav px-3 px-lg-4 py-3">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="index.html">ShopPrime</a>
+
+          <div class="d-flex align-items-center gap-2 order-lg-3">
+            <a class="btn icon-btn" href="#"><i class="bi bi-person"></i></a>
+            <a class="btn icon-btn" href="#"><i class="bi bi-heart"></i></a>
+            <a class="btn icon-btn" href="cart.html"><i class="bi bi-cart3"></i></a>
+            <button class="btn icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+              <i class="bi bi-list"></i>
+            </button>
+          </div>
+
+          <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+            <form class="search-wrap mx-lg-auto my-3 my-lg-0">
+              <i class="bi bi-search"></i>
+              <input class="form-control" type="search" placeholder="Search for products, brands and more">
+            </form>
+            <ul class="navbar-nav d-flex align-items-lg-center">
+              <li class="nav-item"><a class="nav-link active" href="#">Electronics</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Fashion</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Beauty</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="mobileMenuLabel">ShopPrime</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <form class="search-wrap mb-4">
+            <i class="bi bi-search"></i>
+            <input class="form-control" type="search" placeholder="Search everything">
+          </form>
+          <div class="list-group list-group-flush mobile-links">
+            <a href="#" class="list-group-item list-group-item-action">Electronics</a>
+            <a href="#" class="list-group-item list-group-item-action">Fashion</a>
+            <a href="#" class="list-group-item list-group-item-action">Home</a>
+            <a href="#" class="list-group-item list-group-item-action">Beauty</a>
+            <a href="#" class="list-group-item list-group-item-action">Deals</a>
+            <a href="#" class="list-group-item list-group-item-action">Support</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero-section">
+        <div class="swiper hero-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <article class="hero-card" style="background-image: linear-gradient(90deg, rgba(7,10,16,.92) 0%, rgba(7,10,16,.56) 52%, rgba(7,10,16,.25) 100%), url('https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1400&q=80');">
+                <div class="hero-content">
+                  <span class="eyebrow">Weekend special</span>
+                  <h1>Next-Gen Electronics Up to 40% Off</h1>
+                  <p class="mb-5 mt-4">Explore top headphones, wearables, smart displays and premium accessories at limited-time prices.</p>
+                  <div class="d-flex flex-wrap gap-3">
+                    <a class="btn btn-primary btn-shop" href="#">Shop Now</a>
+                    <a class="btn btn-soft" href="#">Learn More</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="hero-card" style="background-image: linear-gradient(90deg, rgba(7,10,16,.92) 0%, rgba(7,10,16,.56) 52%, rgba(7,10,16,.25) 100%), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1400&q=80');">
+                <div class="hero-content">
+                  <span class="eyebrow">Fresh arrivals</span>
+                  <h1>Smartphones Built for Work and Play</h1>
+                  <p class="mb-5 mt-4">Fast cameras, all-day batteries and flagship performance across our newest mobile lineup.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-primary btn-shop" href="#">Shop Now</a>
+                    <a class="btn btn-soft" href="#">Compare Models</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- <div class="swiper-pagination"></div> -->
+        </div>
+      </section>
+
+      <section class="quick-categories m-50">
+        <div class="row gy-4">
+          <div class="col-4 col-md-2"><div class="quick-pill"><i class="bi bi-phone"></i><span>Mobiles</span></div></div>
+          <div class="col-4 col-md-2"><div class="quick-pill"><i class="bi bi-smartwatch"></i><span>Wearables</span></div></div>
+          <div class="col-4 col-md-2"><div class="quick-pill"><i class="bi bi-laptop"></i><span>Laptops</span></div></div>
+          <div class="col-4 col-md-2"><div class="quick-pill"><i class="bi bi-speaker"></i><span>Audio</span></div></div>
+          <div class="col-4 col-md-2"><div class="quick-pill"><i class="bi bi-controller"></i><span>Gaming</span></div></div>
+          <div class="col-4 col-md-2"><div class="quick-pill"><i class="bi bi-lightning-charge"></i><span>Daily Tech</span></div></div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="section-head">
+          <div class="deals-heading">
+            <h2>Deals of the Day</h2>
+            <div class="deal-timer" id="dealTimer" aria-label="24 hour countdown">
+              <i class="bi bi-clock"></i>
+              <span id="dealTimerValue">24h : 00m : 00s</span>
+            </div>
+          </div>
+          <a href="#">View All</a>
+        </div>
+        <div class="deals-layout">
+          <article class="deals-feature">
+            <span class="tag tag-deal-main">60% Off</span>
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=80" alt="Nike Air Zoom Infinity">
+            <div class="deals-feature-copy">
+              <h3>Nike Air Zoom Infinity</h3>
+              <p>Professional Series Running Shoes</p>
+              <div class="deals-feature-price">
+                <strong>$129.00</strong>
+                <span>$320.00</span>
+              </div>
+              <a class="deals-cart-btn" href="#" aria-label="Add to cart">
+                <i class="bi bi-cart-plus"></i>
+              </a>
+            </div>
+          </article>
+          <div class="deals-side">
+            <article class="deals-mini-card">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80" alt="Premium Audio Hub">
+              <div class="deals-mini-copy">
+                <h3>Premium Audio Hub</h3>
+                <div class="deals-mini-meta">
+                  <strong>From $49</strong>
+                  <!-- <span class="mini-badge gold">Top Rated</span> -->
+                </div>
+              </div>
+            </article>
+            <article class="deals-mini-card">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80" alt="Smart Watch Pro">
+              <div class="deals-mini-copy">
+                <h3>Smart Watch Pro</h3>
+                <div class="deals-mini-meta">
+                  <strong>$199.00</strong>
+                  <!-- <span class="mini-badge blue">Hot</span> -->
+                </div>
+              </div>
+            </article>
+            <article class="deals-bundle-card">
+              <div class="deals-bundle-copy">
+                <span class="bundle-tag">Bundle &amp; Save</span>
+                <h3>Gamer's Kit 2024</h3>
+                <p>Mechanical keyboard + Precision mouse</p>
+                <a href="#">Claim Bundle <i class="bi bi-arrow-right"></i></a>
+              </div>
+              <img src="https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=900&q=80" alt="Gamer kit keyboard">
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section m-50">
+        <div class="section-head">
+          <div>
+            <h2>New Arrivals</h2>
+            <p>Just landed this week</p>
+          </div>
+          <a href="#">View All</a>
+        </div>
+        <div class="swiper catalog-swiper new-arrivals-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <article class="product-card large">
+                <span class="tag new">New</span>
+                <img src="https://images.unsplash.com/photo-1517059224940-d4af9eec41e5?auto=format&fit=crop&w=1200&q=80" alt="Drone">
+                <div class="product-body">
+                  <h3>SkyMaster 4K Drone</h3>
+                  <p>Ultra-stable video capture</p>
+                  <strong>$899.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card large">
+                <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=1200&q=80" alt="Earbuds">
+                <div class="product-body">
+                  <h3>SonicSync Earbuds</h3>
+                  <p>Spatial audio on the move</p>
+                  <strong>$149.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card large">
+                <span class="tag hot">Trending</span>
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1200&q=80" alt="Bottle">
+                <div class="product-body">
+                  <h3>Aura Smart Bottle</h3>
+                  <p>Hydration with temperature display</p>
+                  <strong>$75.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card large">
+                <span class="tag gold">Just In</span>
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=1200&q=80" alt="Watch">
+                <div class="product-body">
+                  <h3>Pulse One Watch</h3>
+                  <p>Fitness and focus in one band</p>
+                  <strong>$219.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card large">
+                <span class="tag gold">Just In</span>
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=1200&q=80" alt="Watch">
+                <div class="product-body">
+                  <h3>Pulse One Watch</h3>
+                  <p>Fitness and focus in one band</p>
+                  <strong>$219.00</strong>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- <div class="swiper-pagination new-arrivals-pagination"></div> -->
+        </div>
+      </section>
+
+      <section class="content-section m-50">
+        <div class="section-head">
+          <div>
+            <h2>Best Sellers</h2>
+            <p>Customer favorites across categories</p>
+          </div>
+          <a href="#">View All</a>
+        </div>
+        <div class="swiper catalog-swiper best-sellers-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <article class="product-card">
+                <span class="tag gold">Best Value</span>
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80" alt="Laptop">
+                <div class="product-body">
+                  <h3>Ultra Laptop Pro</h3>
+                  <strong>$1,449.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card">
+                <span class="tag new">Bundle</span>
+                <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1200&q=80" alt="Speaker">
+                <div class="product-body">
+                  <h3>Mono Speaker</h3>
+                  <strong>$429.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card">
+                <span class="tag hot">Hot</span>
+                <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=1200&q=80" alt="Tablet">
+                <div class="product-body">
+                  <h3>Luxe Tablet S</h3>
+                  <strong>$769.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card">
+                <span class="tag sale">Sale</span>
+                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=1200&q=80" alt="Ring light">
+                <div class="product-body">
+                  <h3>Glow Smart Ring</h3>
+                  <strong>$299.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card">
+                <span class="tag new">Top Pick</span>
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Display">
+                <div class="product-body">
+                  <h3>Trade Vision Screen</h3>
+                  <strong>$199.00</strong>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- <div class="swiper-pagination best-sellers-pagination"></div> -->
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="section-head">
+          <div>
+            <h2>Top Brands Showcase</h2>
+            <p>Brands powering the future</p>
+          </div>
+        </div>
+        <div class="swiper brands-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><div class="brand-tile">SONIQ</div></div>
+            <div class="swiper-slide"><div class="brand-tile">NOVA</div></div>
+            <div class="swiper-slide"><div class="brand-tile">ORBIT</div></div>
+            <div class="swiper-slide"><div class="brand-tile">ZENIX</div></div>
+            <div class="swiper-slide"><div class="brand-tile">LUMA</div></div>
+            <div class="swiper-slide"><div class="brand-tile">AXON</div></div>
+            <div class="swiper-slide"><div class="brand-tile">PULSE</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section m-50">
+        <div class="section-head">
+          <div>
+            <h2>More Products</h2>
+            <p>Design-forward tech for every room</p>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-md-7">
+            <article class="banner-card more-product-card">
+              <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1400&q=80" alt="Monitor">
+              <div class="more-product-copy">
+                <div>
+                  <h3>Ultra-Wide 4K Monitor</h3>
+                  <p>Immersive Visual Experience</p>
+                  <strong>$549.00</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-md-5">
+            <article class="banner-card more-product-card">
+              <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1200&q=80" alt="Speaker">
+              <div class="more-product-copy">
+                <div>
+                  <h3>Smart Echo Speaker</h3>
+                  <p>Premium Ambient Sound</p>
+                  <strong>$129.00</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section pb-50">
+        <div class="section-head">
+          <div>
+            <h2>Popular Products</h2>
+          </div>
+          <a href="#">View All</a>
+        </div>
+        <div class="swiper popular-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <article class="product-card popular-product-card">
+                <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=1200&q=80" alt="Mouse">
+                <div class="product-body">
+                  <h3>Gaming Mouse Elite</h3>
+                  <strong>$79.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card popular-product-card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80" alt="Headphones">
+                <div class="product-body">
+                  <h3>Studio Pro Headphones</h3>
+                  <strong>$299.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card popular-product-card">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80" alt="Phone">
+                <div class="product-body">
+                  <h3>Titan Smartphone X</h3>
+                  <strong>$999.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card popular-product-card">
+                <img src="https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=1200&q=80" alt="Keyboard">
+                <div class="product-body">
+                  <h3>RGB Mechanical Keyboard</h3>
+                  <strong>$149.00</strong>
+                </div>
+              </article>
+            </div>
+            <div class="swiper-slide">
+              <article class="product-card popular-product-card">
+                <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=1200&q=80" alt="Mouse">
+                <div class="product-body">
+                  <h3>Gaming Mouse Elite</h3>
+                  <strong>$79.00</strong>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- <div class="swiper-pagination popular-pagination"></div> -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row g-4 g-lg-5 align-items-start">
+          <div class="col-12 col-lg-6">
+            <div class="footer-brand">
+              <h3>ShopPrime</h3>
+              <p>The premium destination for the modern technologist. We curate elite hardware and accessories designed to elevate your digital lifestyle. Quality isn't an option; it's our standard.</p>
+              <div class="d-flex gap-4 social-links">
+                <a href="#" aria-label="Globe"><i class="bi bi-globe-americas"></i></a>
+                <a href="#" aria-label="At"><i class="bi bi-at"></i></a>
+                <a href="#" aria-label="Chat"><i class="bi bi-chat-square-text"></i></a>
+                <a href="#" aria-label="Share"><i class="bi bi-share"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="row g-4">
+              <div class="col-4">
+                <h4>Shopping</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#">All Products</a></li>
+                  <li><a href="#">Flash Deals</a></li>
+                  <li><a href="#">New Releases</a></li>
+                  <li><a href="#">Smart Home</a></li>
+                  <li><a href="#">Gaming Elite</a></li>
+                </ul>
+              </div>
+              <div class="col-4">
+                <h4>Support</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#">Order Tracking</a></li>
+                  <li><a href="#">Shipping Policy</a></li>
+                  <li><a href="#">Returns &amp; Exchanges</a></li>
+                  <li><a href="#">Help Center</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                </ul>
+              </div>
+              <div class="col-4">
+                <h4>Company</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#">About Our Brand</a></li>
+                  <li><a href="#">Sustainability</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Press Media</a></li>
+                  <li><a href="#">Investors</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="footer-meta">
+            <div class="footer-meta-left">
+              <span>&copy; 2024 ShopPrime. All rights reserved.</span>
+              <a href="#">Privacy</a>
+              <a href="#">Terms</a>
+              <a href="#">Cookies</a>
+              <a href="#">Sitemap</a>
+            </div>
+            <div class="footer-meta-right">
+              <a href="#" aria-label="Card"><i class="bi bi-credit-card"></i></a>
+              <a href="#" aria-label="Payment"><i class="bi bi-wallet2"></i></a>
+              <a href="#" aria-label="Security"><i class="bi bi-patch-check"></i></a>
+              <a href="#" aria-label="Shield"><i class="bi bi-shield-check"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
