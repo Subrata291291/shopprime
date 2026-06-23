@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Dashboard – ShopPrime</title>
+  <meta name="description" content="Manage your ShopPrime profile, orders, addresses and account settings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ══ HEADER (from index.html) ═══════════════════════════════════ -->
+  <header class="position-sticky top-0" style="z-index:999;">
+    <nav class="navbar navbar-expand-lg navbar-dark top-nav px-3 px-lg-4 py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">ShopPrime</a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+          <a class="btn icon-btn" href="dashboard.html"><i class="bi bi-person"></i></a>
+          <a class="btn icon-btn" href="#"><i class="bi bi-heart"></i></a>
+          <a class="btn icon-btn" href="cart.html"><i class="bi bi-cart3"></i></a>
+          <button class="btn icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <form class="search-wrap mx-lg-auto my-3 my-lg-0">
+            <i class="bi bi-search"></i>
+            <input class="form-control" type="search" placeholder="Search for products, brands and more">
+          </form>
+          <ul class="navbar-nav d-flex align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="shop.html">Electronics</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Fashion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Beauty</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Mobile offcanvas -->
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileMenuLabel">ShopPrime</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="search-wrap mb-4">
+          <i class="bi bi-search"></i>
+          <input class="form-control" type="search" placeholder="Search everything">
+        </form>
+        <div class="list-group list-group-flush mobile-links">
+          <a href="shop.html" class="list-group-item list-group-item-action">Electronics</a>
+          <a href="#" class="list-group-item list-group-item-action">Fashion</a>
+          <a href="#" class="list-group-item list-group-item-action">Home</a>
+          <a href="#" class="list-group-item list-group-item-action">Beauty</a>
+          <a href="cart.html" class="list-group-item list-group-item-action">Cart</a>
+          <a href="#" class="list-group-item list-group-item-action">Deals</a>
+          <a href="#" class="list-group-item list-group-item-action">Support</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ DASHBOARD SECTION ══════════════════════════════════════════ -->
+  <div class="db-section">
+    <div class="container">
+      <div class="db-layout">
+
+        <!-- ── Sidebar ────────────────────────────────────────────── -->
+        <aside class="db-sidebar">
+
+          <!-- Card 1: User greeting -->
+          <div class="db-user-block">
+            <div class="db-avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                alt="Alex Johnson">
+            </div>
+            <div class="db-user-info">
+              <div class="db-hello">Hello,</div>
+              <div class="db-name">Alex Johnson</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Nav -->
+          <div class="db-nav-card">
+            <nav class="db-nav">
+              <button class="db-nav-item active" data-tab="profile"><i class="bi bi-person"></i> Profile</button>
+              <button class="db-nav-item" data-tab="orders"><i class="bi bi-box-seam"></i> Orders</button>
+              <button class="db-nav-item" data-tab="wishlist"><i class="bi bi-heart"></i> Wishlist</button>
+              <button class="db-nav-item" data-tab="addresses"><i class="bi bi-geo-alt"></i> Addresses</button>
+              <button class="db-nav-item" data-tab="payments"><i class="bi bi-credit-card-2-front"></i>
+                Payments</button>
+              <button class="db-nav-item" data-tab="settings"><i class="bi bi-gear"></i> Settings</button>
+            </nav>
+          </div>
+
+          <!-- Card 3: Premium upgrade -->
+          <div class="db-premium-sidebar">
+            <div class="db-premium-sidebar-title">Premium Member</div>
+            <div class="db-premium-sidebar-text">Enjoy unlimited free shipping and exclusive early access.</div>
+            <button class="db-premium-sidebar-btn">Upgrade to VIP</button>
+          </div>
+
+        </aside>
+
+        <!-- ── Main Content ───────────────────────────────────────── -->
+        <main class="db-main">
+
+          <!-- ══ PROFILE TAB ════════════════════════════════════════ -->
+          <section class="db-tab active" id="tab-profile">
+
+            <div class="db-greeting-row">
+              <div class="db-greeting">
+                <h1>Hello, Alex!</h1>
+                <p>Manage your profile and account settings here.</p>
+              </div>
+              <span class="db-premium-badge"><i class="bi bi-gear-fill"></i> PREMIUM MEMBER</span>
+            </div>
+
+            <!-- Stats -->
+            <div class="db-stats-row">
+              <div class="db-stat-card">
+                <div class="db-stat-icon blue"><i class="bi bi-truck"></i></div>
+                <div>
+                  <div class="db-stat-label">Total Orders</div>
+                  <div class="db-stat-value">24</div>
+                </div>
+              </div>
+              <div class="db-stat-card">
+                <div class="db-stat-icon yellow"><i class="bi bi-heart-fill"></i></div>
+                <div>
+                  <div class="db-stat-label">Wishlist Items</div>
+                  <div class="db-stat-value">12</div>
+                </div>
+              </div>
+              <div class="db-stat-card">
+                <div class="db-stat-icon orange"><i class="bi bi-calendar3"></i></div>
+                <div>
+                  <div class="db-stat-label">Member Since</div>
+                  <div class="db-stat-value">2021</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="db-content-grid">
+              <!-- Left -->
+              <div>
+                <!-- Personal Information -->
+                <div class="db-card">
+                  <div class="db-card-header">
+                    <div class="db-card-title">Personal Information</div>
+                    <button class="db-edit-all"><i class="bi bi-pencil"></i> Edit All</button>
+                  </div>
+                  <div class="db-fields-grid">
+                    <div class="db-field">
+                      <label>Full Name</label>
+                      <div class="db-field-input">
+                        <span>Alex Johnson</span>
+                        <i class="bi bi-pencil db-pencil"></i>
+                      </div>
+                    </div>
+                    <div class="db-field">
+                      <label>Email Address</label>
+                      <div class="db-field-input">
+                        <span>alex.johnson@example.com</span>
+                        <i class="bi bi-pencil db-pencil"></i>
+                      </div>
+                    </div>
+                    <div class="db-field">
+                      <label>Phone Number</label>
+                      <div class="db-field-input">
+                        <span>+1 (555) 123-4567</span>
+                        <i class="bi bi-pencil db-pencil"></i>
+                      </div>
+                    </div>
+                    <div class="db-field">
+                      <label>Date of Birth</label>
+                      <div class="db-field-input">
+                        <span>May 12, 1992</span>
+                        <i class="bi bi-pencil db-pencil"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="db-card">
+                  <div class="db-card-header">
+                    <div class="db-card-title">Recent Orders</div>
+                    <button class="db-edit-all" onclick="switchTab('orders')">View All</button>
+                  </div>
+                  <table class="db-orders-table">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>#SP-98231</td>
+                        <td>Oct 24, 2023</td>
+                        <td><span class="db-status-badge shipped">Shipped</span></td>
+                        <td>$129.99</td>
+                      </tr>
+                      <tr>
+                        <td>#SP-97120</td>
+                        <td>Oct 12, 2023</td>
+                        <td><span class="db-status-badge delivered">Delivered</span></td>
+                        <td>$45.50</td>
+                      </tr>
+                      <tr>
+                        <td>#SP-95804</td>
+                        <td>Sep 28, 2023</td>
+                        <td><span class="db-status-badge delivered">Delivered</span></td>
+                        <td>$220.00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Right -->
+              <div>
+                <!-- Security -->
+                <div class="db-card">
+                  <div class="db-card-title" style="margin-bottom:1.4rem;">Security</div>
+                  <div class="db-security-item">
+                    <div class="db-security-left"><i class="bi bi-lock"></i> Change Password</div>
+                    <i class="bi bi-chevron-right db-chevron"></i>
+                  </div>
+                  <div class="db-security-item">
+                    <div class="db-security-left"><i class="bi bi-shield-check"></i> Enable 2FA</div>
+                    <label class="db-toggle">
+                      <input type="checkbox" id="toggle2fa">
+                      <span class="db-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Upgrade Plan -->
+                <div class="db-upgrade-card">
+                  <div class="db-upgrade-title">Upgrade Plan</div>
+                  <div class="db-upgrade-text">Get unlimited free shipping on all orders.</div>
+                  <button class="db-upgrade-btn">Learn More</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ══ ORDERS TAB ════════════════════════════════════════ -->
+          <section class="db-tab" id="tab-orders">
+
+            <!-- Order 1: Delivered -->
+            <div class="db-order-card">
+              <div class="db-order-card-header">
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Order ID</span>
+                  <span class="db-order-meta-value">#SP-98234</span>
+                </div>
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Placed On</span>
+                  <span class="db-order-meta-value">Jan 12, 2024</span>
+                </div>
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Total Amount</span>
+                  <span class="db-order-meta-value amount">$1,249.00</span>
+                </div>
+                <div class="db-order-card-status delivered">
+                  <i class="bi bi-check-circle-fill"></i> Delivered
+                </div>
+              </div>
+              <div class="db-order-card-body">
+                <div class="db-order-thumb-wrap">
+                  <div class="db-order-thumb">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=120&q=80"
+                      alt="Nike Air Max">
+                  </div>
+                  <div class="db-order-thumb">
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=120&q=80"
+                      alt="Timex Watch">
+                  </div>
+                </div>
+                <div class="db-order-product-info">
+                  <div class="db-order-product-name">Multiple Items (2)</div>
+                  <div class="db-order-product-sub">Nike Air Max &amp; Timex Classic Watch</div>
+                </div>
+                <div class="db-order-actions">
+                  <button class="db-btn-ghost">View Order Details</button>
+                  <button class="db-btn-primary">Buy it again</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order 2: Shipped -->
+            <div class="db-order-card">
+              <div class="db-order-card-header">
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Order ID</span>
+                  <span class="db-order-meta-value">#SP-97112</span>
+                </div>
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Placed On</span>
+                  <span class="db-order-meta-value">Feb 05, 2024</span>
+                </div>
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Total Amount</span>
+                  <span class="db-order-meta-value amount">$349.50</span>
+                </div>
+                <div class="db-order-card-status shipped">
+                  <i class="bi bi-truck"></i> Shipped
+                </div>
+              </div>
+              <div class="db-order-card-body">
+                <div class="db-order-thumb-wrap">
+                  <div class="db-order-thumb">
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=120&q=80"
+                      alt="Headphones">
+                  </div>
+                </div>
+                <div class="db-order-product-info">
+                  <div class="db-order-product-name">Sony Noise Cancelling Headphones</div>
+                  <div class="db-order-product-sub">Quantity: 1</div>
+                </div>
+                <div class="db-order-actions">
+                  <button class="db-btn-ghost">View Details</button>
+                  <button class="db-btn-track">Track Package</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order 3: Cancelled -->
+            <div class="db-order-card">
+              <div class="db-order-card-header">
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Order ID</span>
+                  <span class="db-order-meta-value">#SP-95660</span>
+                </div>
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Placed On</span>
+                  <span class="db-order-meta-value">Dec 20, 2023</span>
+                </div>
+                <div class="db-order-meta-group">
+                  <span class="db-order-meta-label">Total Amount</span>
+                  <span class="db-order-meta-value amount">$89.00</span>
+                </div>
+                <div class="db-order-card-status cancelled">
+                  <i class="bi bi-x-circle-fill"></i> Cancelled
+                </div>
+              </div>
+              <div class="db-order-card-body">
+                <div class="db-order-thumb-wrap">
+                  <div class="db-order-thumb">
+                    <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=120&q=80"
+                      alt="T-Shirt">
+                  </div>
+                </div>
+                <div class="db-order-product-info">
+                  <div class="db-order-product-name">Premium Essential Tee</div>
+                  <div class="db-order-product-sub">Refund completed on Dec 22</div>
+                </div>
+                <div class="db-order-actions">
+                  <button class="db-btn-ghost">View Details</button>
+                  <button class="db-btn-ghost">Reorder</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="db-pagination">
+              <button class="db-page-btn"><i class="bi bi-chevron-left"></i></button>
+              <button class="db-page-btn active">1</button>
+              <button class="db-page-btn">2</button>
+              <button class="db-page-btn">3</button>
+              <span class="db-page-dots">...</span>
+              <button class="db-page-btn">12</button>
+              <button class="db-page-btn"><i class="bi bi-chevron-right"></i></button>
+            </div>
+
+          </section>
+
+          <!-- ══ WISHLIST TAB ══════════════════════════════════════ -->
+          <section class="db-tab" id="tab-wishlist">
+
+            <!-- Header Row -->
+            <div class="db-wishlist-header">
+              <div>
+                <h2>My Wishlist</h2>
+                <p>Keep track of products you love. You can add them to your cart or share your wishlist with friends.
+                </p>
+              </div>
+              <div class="db-wishlist-header-actions">
+                <button class="db-wishlist-share-btn"><i class="bi bi-share"></i> Share Wishlist</button>
+                <button class="db-wishlist-add-all-btn"><i class="bi bi-cart-plus"></i> Add All to Cart</button>
+              </div>
+            </div>
+
+            <!-- Wishlist Grid -->
+            <div class="db-wishlist-grid">
+
+              <!-- Item 1 -->
+              <div class="db-wishlist-card">
+                <span class="db-wishlist-badge price-drop"><i class="bi bi-arrow-down-short"></i> Price Drop</span>
+                <button class="db-wishlist-remove" aria-label="Remove from wishlist" title="Remove from wishlist"><i
+                    class="bi bi-x-lg"></i></button>
+                <div class="db-wishlist-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+                    alt="Apex Wireless Pro">
+                </div>
+                <div class="db-wishlist-body">
+                  <div class="db-wishlist-rating">
+                    <span class="stars">★ ★ ★ ★ ★</span>
+                    <span class="rating-count">(482)</span>
+                  </div>
+                  <div class="db-wishlist-name">Apex Wireless Pro</div>
+                  <div class="db-wishlist-price-row">
+                    <span class="db-wishlist-price">$299.00</span>
+                    <span class="db-wishlist-price-old">$349.00</span>
+                  </div>
+                  <div class="db-wishlist-stock in-stock"><i class="bi bi-check-circle-fill"></i> In Stock</div>
+                  <button class="db-wishlist-add-btn"><i class="bi bi-cart3"></i> Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="db-wishlist-card">
+                <span class="db-wishlist-badge best-seller">Best Seller</span>
+                <button class="db-wishlist-remove" aria-label="Remove from wishlist" title="Remove from wishlist"><i
+                    class="bi bi-x-lg"></i></button>
+                <div class="db-wishlist-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=500&q=80"
+                    alt="Keychron Q1 Pro">
+                </div>
+                <div class="db-wishlist-body">
+                  <div class="db-wishlist-rating">
+                    <span class="stars">★ ★ ★ ★ ★</span>
+                    <span class="rating-count">(1,204)</span>
+                  </div>
+                  <div class="db-wishlist-name">Keychron Q1 Pro</div>
+                  <div class="db-wishlist-price-row">
+                    <span class="db-wishlist-price">$189.00</span>
+                  </div>
+                  <div class="db-wishlist-stock low-stock"><i class="bi bi-exclamation-triangle-fill"></i> Only 2 Left
+                  </div>
+                  <button class="db-wishlist-add-btn"><i class="bi bi-cart3"></i> Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="db-wishlist-card">
+                <span class="db-wishlist-badge trending">Trending</span>
+                <button class="db-wishlist-remove" aria-label="Remove from wishlist" title="Remove from wishlist"><i
+                    class="bi bi-x-lg"></i></button>
+                <div class="db-wishlist-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=500&q=80"
+                    alt="Logitech MX Master 3S">
+                </div>
+                <div class="db-wishlist-body">
+                  <div class="db-wishlist-rating">
+                    <span class="stars">★ ★ ★ ★ ☆</span>
+                    <span class="rating-count">(850)</span>
+                  </div>
+                  <div class="db-wishlist-name">Logitech MX Master 3S</div>
+                  <div class="db-wishlist-price-row">
+                    <span class="db-wishlist-price">$99.99</span>
+                  </div>
+                  <div class="db-wishlist-stock in-stock"><i class="bi bi-check-circle-fill"></i> In Stock</div>
+                  <button class="db-wishlist-add-btn"><i class="bi bi-cart3"></i> Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="db-wishlist-card">
+                <button class="db-wishlist-remove" aria-label="Remove from wishlist" title="Remove from wishlist"><i
+                    class="bi bi-x-lg"></i></button>
+                <div class="db-wishlist-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=500&q=80"
+                    alt="Sony Alpha 7 IV">
+                </div>
+                <div class="db-wishlist-body">
+                  <div class="db-wishlist-rating">
+                    <span class="stars">★ ★ ★ ★ ★</span>
+                    <span class="rating-count">(240)</span>
+                  </div>
+                  <div class="db-wishlist-name">Sony Alpha 7 IV</div>
+                  <div class="db-wishlist-price-row">
+                    <span class="db-wishlist-price">$2,499.00</span>
+                  </div>
+                  <div class="db-wishlist-stock out-of-stock"><i class="bi bi-x-circle-fill"></i> Out of Stock</div>
+                  <button class="db-wishlist-add-btn disabled" disabled><i class="bi bi-bell"></i> Notify Me</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Wishlist Perks Info Banner -->
+            <div class="db-wishlist-info-banner">
+              <div class="db-wishlist-info-content">
+                <i class="bi bi-info-circle-fill"></i>
+                <p>Items in your wishlist will be saved as long as you are logged in. We'll send you notifications if
+                  any of your saved items go on sale or are low on stock.</p>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- ══ ADDRESSES TAB ══════════════════════════════════════ -->
+          <section class="db-tab" id="tab-addresses">
+
+            <!-- Header -->
+            <div class="db-addr-header">
+              <div>
+                <h2>Manage Addresses</h2>
+                <p>Add, edit, or remove your shipping destinations. These addresses will be available during checkout
+                  for faster processing.</p>
+              </div>
+              <button class="db-addr-add-btn"><i class="bi bi-plus-lg"></i> Add New Address</button>
+            </div>
+
+            <!-- Address cards -->
+            <div class="db-address-grid">
+              <div class="db-address-card">
+                <div class="db-addr-tags">
+                  <span class="db-addr-tag tag-default">Default</span>
+                  <span class="db-addr-tag tag-home">Home</span>
+                </div>
+                <div class="db-addr-name">Alex Rivers</div>
+                <div class="db-addr-text">248 Luxury Avenue, Suite 1200<br>Manhattan, NY 10001<br>United States</div>
+                <div class="db-addr-phone"><i class="bi bi-telephone"></i> +1 (555) 012-3456</div>
+              </div>
+
+              <div class="db-address-card">
+                <div class="db-addr-tags">
+                  <span class="db-addr-tag tag-office">Office</span>
+                </div>
+                <div class="db-addr-name">Alex Rivers</div>
+                <div class="db-addr-text">Quantum Tech Park, Tower B<br>4500 Innovation Way<br>San Francisco, CA 94105
+                </div>
+                <div class="db-addr-phone"><i class="bi bi-telephone"></i> +1 (555) 987-6543</div>
+              </div>
+
+              <div class="db-address-card">
+                <div class="db-addr-tags">
+                  <span class="db-addr-tag tag-other">Other</span>
+                </div>
+                <div class="db-addr-name">Summer Retreat</div>
+                <div class="db-addr-text">12 Coastal Lane<br>Malibu, CA 90265</div>
+                <div class="db-addr-phone"><i class="bi bi-telephone"></i> +1 (555) 242-1100</div>
+              </div>
+            </div>
+
+            <!-- Add another -->
+            <div class="db-add-addr-card">
+              <i class="bi bi-geo-alt"></i>
+              <span>Add another address</span>
+            </div>
+
+            <!-- Trust banner -->
+            <div class="db-trust-row">
+              <div class="db-trust-banner">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+                  alt="Trusted">
+                <div class="db-trust-banner-label">TRUSTED</div>
+              </div>
+              <div class="db-trust-security">
+                <i class="bi bi-shield-check"></i>
+                <p>Your shipping data is encrypted and managed with bank-level security.</p>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- ══ PAYMENTS TAB ════════════════════════════════════════ -->
+          <section class="db-tab" id="tab-payments">
+            <div class="db-tab-heading">
+              <h2>Payment Methods</h2>
+              <p>Manage your saved cards</p>
+            </div>
+            <div class="db-payment-card">
+              <div class="db-card-icon">💳</div>
+              <div>
+                <div class="db-card-num">Visa •••• 4242</div>
+                <div class="db-card-exp">Expires 09/26</div>
+              </div>
+              <span class="db-default-tag">Default</span>
+            </div>
+            <div class="db-payment-card">
+              <div class="db-card-icon">🏦</div>
+              <div>
+                <div class="db-card-num">Mastercard •••• 8891</div>
+                <div class="db-card-exp">Expires 03/25</div>
+              </div>
+            </div>
+            <button class="db-add-card-btn"><i class="bi bi-plus-circle"></i> Add New Card</button>
+          </section>
+
+          <!-- ══ SETTINGS TAB ════════════════════════════════════════ -->
+          <section class="db-tab" id="tab-settings">
+            <div class="db-tab-heading">
+              <h2>Settings</h2>
+              <p>Manage your account preferences</p>
+            </div>
+            <div class="db-card">
+              <div style="margin-bottom:2rem;">
+                <div class="db-settings-group-title">Notifications</div>
+                <div class="db-settings-row">
+                  <div>
+                    <div class="db-settings-row-label">Email Notifications</div>
+                    <div class="db-settings-row-sub">Receive order updates and offers via email</div>
+                  </div>
+                  <label class="db-toggle"><input type="checkbox" checked><span class="db-toggle-slider"></span></label>
+                </div>
+                <div class="db-settings-row">
+                  <div>
+                    <div class="db-settings-row-label">Push Notifications</div>
+                    <div class="db-settings-row-sub">Browser push alerts for your orders</div>
+                  </div>
+                  <label class="db-toggle"><input type="checkbox"><span class="db-toggle-slider"></span></label>
+                </div>
+                <div class="db-settings-row">
+                  <div>
+                    <div class="db-settings-row-label">SMS Notifications</div>
+                    <div class="db-settings-row-sub">Get text updates for shipping status</div>
+                  </div>
+                  <label class="db-toggle"><input type="checkbox" checked><span class="db-toggle-slider"></span></label>
+                </div>
+              </div>
+              <div>
+                <div class="db-settings-group-title">Privacy</div>
+                <div class="db-settings-row">
+                  <div>
+                    <div class="db-settings-row-label">Profile Visibility</div>
+                    <div class="db-settings-row-sub">Make your profile visible to other users</div>
+                  </div>
+                  <label class="db-toggle"><input type="checkbox"><span class="db-toggle-slider"></span></label>
+                </div>
+                <div class="db-settings-row">
+                  <div>
+                    <div class="db-settings-row-label">Activity Status</div>
+                    <div class="db-settings-row-sub">Show when you're active on the platform</div>
+                  </div>
+                  <label class="db-toggle"><input type="checkbox" checked><span class="db-toggle-slider"></span></label>
+                </div>
+              </div>
+              <button class="db-danger-btn"><i class="bi bi-exclamation-triangle"></i> Deactivate Account</button>
+            </div>
+          </section>
+
+        </main>
+      </div><!-- /.db-layout -->
+    </div><!-- /.container -->
+  </div><!-- /.db-section -->
+
+  <!-- ══ FOOTER (from index.html) ═══════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 align-items-start">
+        <div class="col-12 col-lg-6">
+          <div class="footer-brand">
+            <h3>ShopPrime</h3>
+            <p>The premium destination for the modern technologist. We curate elite hardware and accessories designed to
+              elevate your digital lifestyle. Quality isn't an option; it's our standard.</p>
+            <div class="d-flex gap-4 social-links">
+              <a href="#" aria-label="Globe"><i class="bi bi-globe-americas"></i></a>
+              <a href="#" aria-label="At"><i class="bi bi-at"></i></a>
+              <a href="#" aria-label="Chat"><i class="bi bi-chat-square-text"></i></a>
+              <a href="#" aria-label="Share"><i class="bi bi-share"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="row g-4">
+            <div class="col-4">
+              <h4>Shopping</h4>
+              <ul class="list-unstyled">
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="#">Flash Deals</a></li>
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">Smart Home</a></li>
+                <li><a href="#">Gaming Elite</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <h4>Support</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">Order Tracking</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns &amp; Exchanges</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <h4>Company</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">About Our Brand</a></li>
+                <li><a href="#">Sustainability</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Media</a></li>
+                <li><a href="#">Investors</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-meta">
+          <div class="footer-meta-left">
+            <span>&copy; 2024 ShopPrime. All rights reserved.</span>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Cookies</a>
+            <a href="#">Sitemap</a>
+          </div>
+          <div class="footer-meta-right">
+            <a href="#" aria-label="Card"><i class="bi bi-credit-card"></i></a>
+            <a href="#" aria-label="Payment"><i class="bi bi-wallet2"></i></a>
+            <a href="#" aria-label="Security"><i class="bi bi-patch-check"></i></a>
+            <a href="#" aria-label="Shield"><i class="bi bi-shield-check"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function switchTab(name) {
+      document.querySelectorAll('.db-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.db-nav-item').forEach(n => n.classList.remove('active'));
+      const tab = document.getElementById('tab-' + name);
+      const nav = document.querySelector('[data-tab="' + name + '"]');
+      if (tab) tab.classList.add('active');
+      if (nav) nav.classList.add('active');
+    }
+
+    document.querySelectorAll('.db-nav-item').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    document.querySelectorAll('.db-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.db-orders-filter').querySelectorAll('.db-filter-btn')
+          .forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    document.getElementById('signOutBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to sign out?')) {
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
+</body>
+
+</html>
