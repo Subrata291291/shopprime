@@ -1448,6 +1448,7 @@ CHECKOUT PAGE STYLES
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 0.8rem;
   padding: 1.6rem;
+  padding-top: 5.2rem;
   position: relative;
   background: #161616;
 }
@@ -1456,12 +1457,41 @@ CHECKOUT PAGE STYLES
   border-color: #4d7fff;
 }
 
+/* Delete button on address card */
+.addr-delete-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.6rem;
+  color: #666;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 5;
+  padding: 0;
+  line-height: 1;
+}
+
+.addr-delete-btn:hover {
+  background: rgba(255, 59, 59, 0.12);
+  border-color: #ff3b3b;
+  color: #ff3b3b;
+  transform: scale(1.1);
+}
+
 .address-check {
   position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  width: 2.4rem;
-  height: 2.4rem;
+  top: 1.4rem;
+  left: 1.4rem;
+  width: 2.6rem;
+  height: 2.6rem;
   background: #4d7fff;
   border-radius: 50%;
   display: flex;
@@ -1921,4 +1951,437 @@ CHECKOUT PAGE STYLES
   .section-action {
     margin-left: auto;
   }
+}
+
+/* ==========================================================================
+   Interactive Switcher & Guest Checkout Styles
+   ========================================================================== */
+
+/* Top Toggle Switcher */
+.checkout-toggle-container {
+  display: inline-flex;
+  background: #1a1a1a;
+  padding: 4px;
+  border-radius: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.checkout-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #8e9aab;
+  padding: 0.6rem 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkout-toggle-btn.active {
+  background: #4d7fff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(77, 127, 255, 0.3);
+}
+
+.checkout-toggle-btn:hover:not(.active) {
+  color: #fff;
+}
+
+/* Guest input fields (White background with dark text) */
+.guest-input {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0.6rem !important;
+  padding: 1rem 1.2rem !important;
+  font-size: 1.35rem !important;
+  transition: border-color 0.3s, box-shadow 0.3s !important;
+  font-family: "Inter", sans-serif;
+  height: auto !important;
+}
+
+.guest-input::placeholder {
+  color: #888888 !important;
+  opacity: 1;
+}
+
+.guest-input:focus {
+  border-color: #4d7fff !important;
+  box-shadow: 0 0 0 3px rgba(77, 127, 255, 0.2) !important;
+  outline: none !important;
+  background: #ffffff !important;
+}
+
+/* Guest Delivery Options */
+.delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.delivery-option {
+  border: 1px solid #2a2a2a;
+  border-radius: 0.8rem;
+  padding: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #161616;
+}
+
+.delivery-option:hover {
+  border-color: #4d7fff;
+  background: rgba(77, 127, 255, 0.03);
+}
+
+.delivery-option.active {
+  border-color: #4d7fff;
+  background: rgba(77, 127, 255, 0.05);
+}
+
+.delivery-option input[type="radio"] {
+  width: 1.8rem;
+  height: 1.8rem;
+  cursor: pointer;
+  accent-color: #4d7fff;
+}
+
+.delivery-label {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.delivery-name {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.delivery-desc {
+  font-size: 1.15rem;
+  color: #888;
+}
+
+.delivery-price {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Guest Payment Tabs */
+.payment-tabs {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.payment-tab {
+  flex: 1;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.payment-tab.active {
+  background: #aabaff !important;
+  color: #0b0c10 !important;
+  border: 1px solid #aabaff !important;
+}
+
+.payment-tab:not(.active) {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid #3a3a3a !important;
+}
+
+.payment-tab:not(.active):hover {
+  border-color: #aabaff !important;
+  background: rgba(170, 186, 255, 0.05) !important;
+}
+
+/* Input Card Number Icon Wrapper */
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrapper input {
+  padding-right: 3.6rem !important;
+  width: 100%;
+}
+
+.input-icon-wrapper i {
+  position: absolute;
+  right: 1.2rem;
+  color: #666;
+  font-size: 1.8rem;
+  pointer-events: none;
+}
+
+/* Guest Order Summary Sidebar Styling */
+.guest-total-amount {
+  color: #4d7fff !important;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.guest-purchase-btn {
+  width: 100%;
+  border: none;
+  padding: 1.4rem;
+  border-radius: 0.8rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-top: 1.6rem;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: #fff !important;
+}
+
+.guest-purchase-btn:hover {
+  background: #ff5a20 !important;
+}
+
+/* Guest Form Labels - cleaner appearance for guest sections */
+.guest-only .form-group label {
+  font-size: 1.25rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+/* Guest section header link */
+.guest-only .section-action {
+  color: #4d7fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.guest-only .section-action:hover {
+  color: #7aa3ff;
+}
+
+/* Guest checkout header styling */
+.checkout-header.guest-only {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 2.4rem;
+}
+
+.checkout-header.guest-only h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+/* Guest Promo Box */
+.promo-box .promo-input {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0.6rem;
+  font-size: 1.3rem;
+}
+
+.promo-box .promo-btn {
+  border: 1px solid #3a3a3a !important;
+  border-radius: 0.6rem !important;
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  padding: 0.8rem 1.6rem !important;
+  background: transparent !important;
+  color: #fff !important;
+  transition: all 0.3s ease;
+}
+
+.promo-box .promo-btn:hover {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border-color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Add New Address Modal
+   ========================================================================== */
+
+/* Modal backdrop darker */
+#addAddressModal .modal-backdrop,
+.modal-backdrop {
+  background-color: #000;
+}
+
+/* Modal content box */
+.address-modal-content {
+  background: #1c1c1e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.4rem;
+  color: #fff;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+/* Modal header */
+.address-modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem 2.4rem;
+}
+
+.address-modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+/* Modal body */
+.address-modal-body {
+  padding: 2.4rem;
+}
+
+/* Field labels */
+.addr-label {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #888;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+/* Input fields */
+.addr-input {
+  background: #2a2a2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border-radius: 0.7rem !important;
+  font-size: 1.3rem !important;
+  padding: 1rem 1.2rem !important;
+  font-family: "Inter", sans-serif;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.addr-input::placeholder {
+  color: #555 !important;
+}
+
+.addr-input:focus {
+  outline: none !important;
+  border-color: #4d7fff !important;
+  box-shadow: 0 0 0 3px rgba(77, 127, 255, 0.18) !important;
+  background: #2a2a2e !important;
+}
+
+/* Select dropdown arrow color fix */
+.addr-input.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23aaaaaa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1.2rem center !important;
+  background-size: 1.4rem !important;
+}
+
+.addr-input.form-select option {
+  background: #2a2a2e;
+  color: #fff;
+}
+
+/* Textarea */
+.addr-textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+/* Address Type toggle buttons */
+.addr-type-btn {
+  flex: 1;
+  padding: 1rem 1.6rem;
+  border-radius: 0.7rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #aaa;
+}
+
+.addr-type-btn.active {
+  background: rgba(77, 127, 255, 0.12);
+  border-color: #4d7fff;
+  color: #4d7fff;
+}
+
+.addr-type-btn:hover:not(.active) {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* Modal footer */
+.address-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.6rem 2.4rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  background: transparent;
+}
+
+/* Cancel button */
+.addr-cancel-btn {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 0.7rem;
+  transition: color 0.2s;
+}
+
+.addr-cancel-btn:hover {
+  color: #fff;
+}
+
+/* Save Address button */
+.addr-save-btn {
+  background: #4d7fff;
+  color: #fff !important;
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 0.9rem 2.4rem;
+  border-radius: 0.7rem;
+  border: none;
+  transition: background 0.25s, transform 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.addr-save-btn:hover {
+  background: #3a6bff;
+  transform: translateY(-1px);
+}
+
+.addr-save-btn:active {
+  transform: translateY(0);
 }

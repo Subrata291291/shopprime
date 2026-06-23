@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Confirmed - ShopPrime</title>
+  <meta name="description" content="Your order has been placed successfully. Thank you for shopping with ShopPrime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <style>
+    /* ============================================================
+       Thank You Page — Scoped Styles
+       ============================================================ */
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      font-size: 10px; /* rem base */
+    }
+
+    /* ---- Hero ---- */
+    .ty-hero {
+      text-align: center;
+      padding: 6rem 0 4rem;
+    }
+
+    .ty-check-circle {
+      width: 8rem;
+      height: 8rem;
+      background: linear-gradient(135deg, #2a3f7f 0%, #3d5fc0 100%);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2.4rem;
+      box-shadow: 0 0 0 1rem rgba(77, 127, 255, 0.1), 0 0 0 2rem rgba(77, 127, 255, 0.05);
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .ty-check-circle i {
+      font-size: 3.6rem;
+      color: #fff;
+    }
+
+    .ty-hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.5px;
+    }
+
+    .ty-hero p {
+      font-size: 1.45rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    .ty-order-id-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 2rem;
+      padding: 0.5rem 1.8rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #bbb;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ---- Main Layout ---- */
+    .ty-grid {
+      display: grid;
+      grid-template-columns: 1fr 36rem;
+      gap: 2.4rem;
+      padding-bottom: 6rem;
+    }
+
+    @media (max-width: 992px) {
+      .ty-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ---- Cards ---- */
+    .ty-card {
+      background: #141417;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.4rem;
+      padding: 2.4rem;
+    }
+
+    .ty-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    /* ---- Delivery Banner ---- */
+    .ty-delivery-banner {
+      background: #141417;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.4rem;
+      padding: 2rem 2.4rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .ty-delivery-banner-text h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .ty-delivery-banner-text p {
+      font-size: 1.25rem;
+      color: #888;
+      margin: 0;
+    }
+
+    .ty-delivery-banner i {
+      font-size: 2.4rem;
+      color: #4d7fff;
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    /* ---- Progress Bar ---- */
+    .ty-progress-wrap {
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .ty-progress-track {
+      height: 3px;
+      background: #2a2a2a;
+      border-radius: 2px;
+      position: relative;
+      margin-bottom: 0.8rem;
+    }
+
+    .ty-progress-fill {
+      height: 100%;
+      width: 16%;  /* at "Confirmed" step */
+      background: linear-gradient(90deg, #4d7fff, #6a9fff);
+      border-radius: 2px;
+      transition: width 1.5s ease;
+    }
+
+    .ty-progress-dot {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: #2a2a2a;
+      border: 2px solid #3a3a3a;
+      transition: all 0.4s ease;
+    }
+
+    .ty-progress-dot.active {
+      background: #4d7fff;
+      border-color: #4d7fff;
+      box-shadow: 0 0 0 4px rgba(77, 127, 255, 0.25);
+    }
+
+    .ty-progress-dot.done {
+      background: #4d7fff;
+      border-color: #4d7fff;
+    }
+
+    .ty-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+    }
+
+    .ty-progress-label {
+      font-size: 1.1rem;
+      color: #555;
+      text-align: center;
+      flex: 1;
+    }
+
+    .ty-progress-label.active {
+      color: #4d7fff;
+      font-weight: 600;
+    }
+
+    /* ---- Order Items ---- */
+    .ty-items-card {
+      background: #141417;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.4rem;
+      padding: 2.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .ty-item {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .ty-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .ty-item:first-child {
+      padding-top: 0;
+    }
+
+    .ty-item-img {
+      width: 7.2rem;
+      height: 7.2rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #222;
+      flex-shrink: 0;
+    }
+
+    .ty-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ty-item-info {
+      flex: 1;
+    }
+
+    .ty-item-name {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .ty-item-specs {
+      font-size: 1.2rem;
+      color: #777;
+      margin-bottom: 0.2rem;
+    }
+
+    .ty-item-qty {
+      font-size: 1.15rem;
+      color: #555;
+    }
+
+    .ty-item-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    /* ---- Info Row (Address + Payment) ---- */
+    .ty-info-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+    }
+
+    @media (max-width: 600px) {
+      .ty-info-row { grid-template-columns: 1fr; }
+    }
+
+    .ty-info-card {
+      background: #141417;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.4rem;
+      padding: 2rem 2.4rem;
+    }
+
+    .ty-info-label {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .ty-info-label i {
+      color: #4d7fff;
+    }
+
+    .ty-addr-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .ty-addr-text {
+      font-size: 1.25rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .ty-visa-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .ty-visa-badge {
+      background: #1a3a8f;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      border-radius: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .ty-visa-info {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .ty-visa-exp {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    .ty-billing-note {
+      font-size: 1.15rem;
+      color: #555;
+      margin-top: 0.8rem;
+    }
+
+    /* ---- Right Sidebar ---- */
+    .ty-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    /* Price Summary */
+    .ty-price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      font-size: 1.3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .ty-price-line:last-of-type {
+      border-bottom: none;
+    }
+
+    .ty-price-label { color: #888; }
+    .ty-price-val { color: #fff; font-weight: 600; }
+    .ty-price-val.free { color: #4dff4d; }
+
+    .ty-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.6rem 0 0;
+      margin-top: 0.4rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ty-total-label {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .ty-total-val {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    /* CTA Buttons */
+    .ty-btn-track {
+      width: 100%;
+      background: #4d7fff;
+      color: #fff;
+      border: none;
+      padding: 1.3rem;
+      border-radius: 0.8rem;
+      font-weight: 700;
+      font-size: 1.35rem;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .ty-btn-track:hover {
+      background: #3a6bff;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .ty-btn-shop {
+      width: 100%;
+      background: #ff6b35;
+      color: #fff;
+      border: none;
+      padding: 1.3rem;
+      border-radius: 0.8rem;
+      font-weight: 700;
+      font-size: 1.35rem;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .ty-btn-shop:hover {
+      background: #ff5a20;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .ty-btn-print {
+      width: 100%;
+      background: transparent;
+      color: #aaa;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 1.2rem;
+      border-radius: 0.8rem;
+      font-weight: 600;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .ty-btn-print:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: #fff;
+    }
+
+    /* Need Help Card */
+    .ty-help-card {
+      background: #141417;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.4rem;
+      padding: 1.8rem 2rem;
+    }
+
+    .ty-help-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .ty-help-header i {
+      color: #4d7fff;
+      font-size: 1.6rem;
+    }
+
+    .ty-help-text {
+      font-size: 1.2rem;
+      color: #777;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .ty-help-link {
+      color: #4d7fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .ty-help-link:hover { color: #7aa3ff; }
+
+    /* ---- Confetti dots (decorative) ---- */
+    .ty-confetti {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .confetti-dot {
+      position: absolute;
+      top: -10px;
+      border-radius: 50%;
+      animation: fall linear forwards;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti container (JS-populated) -->
+  <div class="ty-confetti" id="confettiContainer"></div>
+
+  <!-- Navbar -->
+  <header class="position-sticky top-0" style="z-index: 999;">
+    <nav class="navbar navbar-expand-lg navbar-dark top-nav px-3 px-lg-4 py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">ShopPrime</a>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+          <a class="btn icon-btn" href="#"><i class="bi bi-person"></i></a>
+          <a class="btn icon-btn" href="#"><i class="bi bi-heart"></i></a>
+          <a class="btn icon-btn" href="cart.html"><i class="bi bi-cart3"></i></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main style="position: relative; z-index: 1;">
+    <div class="container">
+
+      <!-- Hero -->
+      <div class="ty-hero">
+        <div class="ty-check-circle">
+          <i class="bi bi-check-lg"></i>
+        </div>
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for your purchase. We've sent a confirmation email to your inbox.</p>
+        <span class="ty-order-id-badge">Order ID: #SP-102938</span>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="ty-grid">
+
+        <!-- LEFT COLUMN -->
+        <div>
+
+          <!-- Delivery banner -->
+          <div class="ty-delivery-banner">
+            <div class="ty-delivery-banner-text">
+              <h2>Arriving by Friday, May 17th</h2>
+              <p>Standard Shipping &mdash; Track your package below</p>
+
+              <!-- Progress bar -->
+              <div class="ty-progress-wrap">
+                <div class="ty-progress-track">
+                  <div class="ty-progress-fill" id="progressFill"></div>
+                  <div class="ty-progress-dot active" style="left: 0%;"></div>
+                  <div class="ty-progress-dot" style="left: 33.3%;"></div>
+                  <div class="ty-progress-dot" style="left: 66.6%;"></div>
+                  <div class="ty-progress-dot" style="left: 100%;"></div>
+                </div>
+                <div class="ty-progress-labels">
+                  <span class="ty-progress-label active">Confirmed</span>
+                  <span class="ty-progress-label">Preparing</span>
+                  <span class="ty-progress-label">Shipped</span>
+                  <span class="ty-progress-label">Delivered</span>
+                </div>
+              </div>
+            </div>
+            <i class="bi bi-truck" style="font-size: 2.8rem;"></i>
+          </div>
+
+          <!-- Order Items -->
+          <div class="ty-items-card">
+            <div class="ty-card-title">Order Items (2)</div>
+
+            <!-- Item 1 -->
+            <div class="ty-item">
+              <div class="ty-item-img">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80" alt="Vortex Runner X1">
+              </div>
+              <div class="ty-item-info">
+                <div class="ty-item-name">Vortex Runner X1</div>
+                <div class="ty-item-specs">Size: 10.5 &nbsp;|&nbsp; Color: Stealth Red</div>
+                <div class="ty-item-qty">Qty: 1</div>
+              </div>
+              <div class="ty-item-price">$159.00</div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="ty-item">
+              <div class="ty-item-img">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80" alt="Sync Pro Watch S2">
+              </div>
+              <div class="ty-item-info">
+                <div class="ty-item-name">Sync Pro Watch S2</div>
+                <div class="ty-item-specs">Titanium / Black Sport Loop</div>
+                <div class="ty-item-qty">Qty: 1</div>
+              </div>
+              <div class="ty-item-price">$399.00</div>
+            </div>
+          </div>
+
+          <!-- Shipping Address + Payment -->
+          <div class="ty-info-row">
+
+            <!-- Shipping Address -->
+            <div class="ty-info-card">
+              <div class="ty-info-label">
+                <i class="bi bi-geo-alt-fill"></i>
+                Shipping Address
+              </div>
+              <div class="ty-addr-name">Alex Thompson</div>
+              <div class="ty-addr-text">
+                1248 Corporate Way, Suite 400<br>
+                Palo Alto, CA 94304<br>
+                United States
+              </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="ty-info-card">
+              <div class="ty-info-label">
+                <i class="bi bi-credit-card-2-front-fill"></i>
+                Payment Method
+              </div>
+              <div class="ty-visa-wrap">
+                <span class="ty-visa-badge">VISA</span>
+                <div>
+                  <div class="ty-visa-info">Visa ending in 4242</div>
+                  <div class="ty-visa-exp">Expires 08/26</div>
+                </div>
+              </div>
+              <div class="ty-billing-note">Billing matches shipping address</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="ty-sidebar">
+
+          <!-- Price Summary -->
+          <div class="ty-card">
+            <div class="ty-card-title">Price Summary</div>
+
+            <div class="ty-price-line">
+              <span class="ty-price-label">Subtotal (2 items)</span>
+              <span class="ty-price-val">$558.00</span>
+            </div>
+            <div class="ty-price-line">
+              <span class="ty-price-label">Shipping</span>
+              <span class="ty-price-val free">FREE</span>
+            </div>
+            <div class="ty-price-line">
+              <span class="ty-price-label">Tax</span>
+              <span class="ty-price-val">$44.64</span>
+            </div>
+
+            <div class="ty-total-row">
+              <span class="ty-total-label">Order Total</span>
+              <span class="ty-total-val">$602.64</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="d-flex flex-column gap-3">
+            <a href="#" class="ty-btn-track" id="trackOrderBtn">
+              Track Order <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="index.html" class="ty-btn-shop">
+              Continue Shopping
+            </a>
+            <button class="ty-btn-print" onclick="window.print()">
+              <i class="bi bi-printer"></i> Print Receipt
+            </button>
+          </div>
+
+          <!-- Need Help -->
+          <div class="ty-help-card">
+            <div class="ty-help-header">
+              <i class="bi bi-question-circle-fill"></i>
+              Need help?
+            </div>
+            <p class="ty-help-text">
+              If you have any questions about your order, visit our support center or contact our 24/7 help desk.
+            </p>
+            <a href="#" class="ty-help-link">Contact Support</a>
+          </div>
+
+        </div>
+      </div><!-- end ty-grid -->
+
+    </div><!-- end container -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 align-items-start">
+        <div class="col-12 col-lg-6">
+          <div class="footer-brand">
+            <h3>ShopPrime</h3>
+            <p>The premium destination for the modern technologist. Quality isn't an option; it's our standard.</p>
+            <div class="d-flex gap-4 social-links">
+              <a href="#" aria-label="Globe"><i class="bi bi-globe-americas"></i></a>
+              <a href="#" aria-label="At"><i class="bi bi-at"></i></a>
+              <a href="#" aria-label="Chat"><i class="bi bi-chat-square-text"></i></a>
+              <a href="#" aria-label="Share"><i class="bi bi-share"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="row g-4">
+            <div class="col-4">
+              <h4>Shopping</h4>
+              <ul class="list-unstyled">
+                <li><a href="index.html">All Products</a></li>
+                <li><a href="#">Flash Deals</a></li>
+                <li><a href="#">New Releases</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <h4>Support</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">Order Tracking</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <h4>Company</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-meta">
+          <div class="footer-meta-left">
+            <span>&copy; 2024 ShopPrime. All rights reserved.</span>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Cookies</a>
+          </div>
+          <div class="footer-meta-right">
+            <a href="#" aria-label="Card"><i class="bi bi-credit-card"></i></a>
+            <a href="#" aria-label="Payment"><i class="bi bi-wallet2"></i></a>
+            <a href="#" aria-label="Security"><i class="bi bi-shield-check"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    // ── Confetti burst on load ──────────────────────────────────
+    const colors = ['#4d7fff','#ff6b35','#4dff4d','#ffd700','#ff3b82','#00d4ff'];
+    const container = document.getElementById('confettiContainer');
+
+    function spawnDot() {
+      const dot = document.createElement('div');
+      dot.classList.add('confetti-dot');
+      const size = Math.random() * 8 + 4;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const left = Math.random() * 100;
+      const duration = Math.random() * 2 + 2;
+      const delay = Math.random() * 2;
+      dot.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        left: ${left}vw; background: ${color};
+        animation: fall ${duration}s ${delay}s linear forwards;
+      `;
+      container.appendChild(dot);
+      setTimeout(() => dot.remove(), (duration + delay) * 1000);
+    }
+
+    // Spawn 60 dots
+    for (let i = 0; i < 60; i++) {
+      setTimeout(spawnDot, i * 40);
+    }
+
+    // ── Animate progress bar fill ───────────────────────────────
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('progressFill').style.width = '16%';
+      }, 300);
+    });
+
+    // ── Track Order button (mock) ───────────────────────────────
+    document.getElementById('trackOrderBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      this.innerHTML = '<i class="bi bi-check-circle-fill"></i> Tracking link sent to your email!';
+      this.style.background = '#2a7a2a';
+      setTimeout(() => {
+        this.innerHTML = 'Track Order <i class="bi bi-arrow-right"></i>';
+        this.style.background = '';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

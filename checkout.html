@@ -11,7 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 </head>
-<body>
+<body class="checkout-mode-guest">
 
   <header class="position-sticky top-0">
     <nav class="navbar navbar-expand-lg navbar-dark top-nav px-3 px-lg-4 py-3">
@@ -64,20 +64,38 @@
 
   <main class="checkout-page">
     <div class="container">
-      <div class="checkout-header">
+      <!-- Breadcrumbs and State Toggle Switcher -->
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div style="font-size: 1.4rem; color: #888;">
+          Html &rarr; <span style="color: #fff;">Checkout</span>
+        </div>
+        <div class="checkout-toggle-container">
+          <button class="checkout-toggle-btn" id="toggle-logged-in">Logged-in User</button>
+          <button class="checkout-toggle-btn active" id="toggle-guest">Guest User</button>
+        </div>
+      </div>
+
+      <!-- Checkout Headers -->
+      <div class="checkout-header logged-in-only" style="display: none;">
         <i class="bi bi-lock-fill"></i>
         <h1>Secure Checkout</h1>
+      </div>
+      <div class="checkout-header guest-only">
+        <div>
+          <h1 class="mb-1">Guest Checkout</h1>
+          <p class="mb-0" style="font-size: 1.4rem; color: #aaaaaa;">Review your information to complete your order.</p>
+        </div>
       </div>
 
       <div class="checkout-container">
         <!-- Left Column -->
         <div>
-          <!-- Login Section -->
-          <div class="checkout-section">
+          <!-- Login Section (Logged In Only) -->
+          <div class="checkout-section logged-in-only" style="display: none;">
             <div class="section-header">
               <div class="section-number">1</div>
               <h2 class="section-title">LOGIN</h2>
-              <a href="#" class="section-action">CHANGE</a>
+              <a href="#" class="section-action" id="login-change-btn">CHANGE</a>
             </div>
             <div class="login-info">
               <div class="login-details">
@@ -87,8 +105,8 @@
             </div>
           </div>
 
-          <!-- Delivery Address Section -->
-          <div class="checkout-section">
+          <!-- Delivery Address Section (Logged In Only) -->
+          <div class="checkout-section logged-in-only" style="display: none;">
             <div class="section-header">
               <div class="section-number">2</div>
               <h2 class="section-title">DELIVERY ADDRESS</h2>
@@ -100,6 +118,9 @@
                 <div class="address-check">
                   <i class="bi bi-check-lg"></i>
                 </div>
+                <button class="addr-delete-btn" title="Delete address">
+                  <i class="bi bi-trash3"></i>
+                </button>
                 <div class="address-type">HOME</div>
                 <div class="address-name">Alex Thorne</div>
                 <div class="address-text">
@@ -111,15 +132,15 @@
               </div>
 
               <!-- Add New Address -->
-              <div class="add-address">
+              <div class="add-address" data-bs-toggle="modal" data-bs-target="#addAddressModal">
                 <i class="bi bi-plus-circle"></i>
                 <span class="add-address-text">Add New Address</span>
               </div>
             </div>
           </div>
 
-          <!-- Order Summary Section -->
-          <div class="checkout-section">
+          <!-- Order Summary Section (Logged In Only) -->
+          <div class="checkout-section logged-in-only" style="display: none;">
             <div class="section-header">
               <div class="section-number">3</div>
               <h2 class="section-title">ORDER SUMMARY</h2>
@@ -165,12 +186,139 @@
               <div class="item-price">$189.00</div>
             </div>
           </div>
+
+          <!-- Contact Information Section (Guest Only) -->
+          <div class="checkout-section guest-only">
+            <div class="section-header">
+              <h2 class="section-title"><i class="bi bi-envelope me-2"></i>Contact Information</h2>
+              <a href="#" class="section-action" id="link-login-faster" style="color: #4d7fff;">Login for faster checkout</a>
+            </div>
+            <div class="form-group mb-3">
+              <label for="guest-email">Email Address</label>
+              <input type="email" id="guest-email" class="form-control guest-input" placeholder="email@example.com">
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="guest-email-offers">
+              <label class="form-check-label" for="guest-email-offers" style="font-size: 1.3rem; color: #aaaaaa;">
+                Email me with news and offers
+              </label>
+            </div>
+          </div>
+
+          <!-- Shipping Address Section (Guest Only) -->
+          <div class="checkout-section guest-only">
+            <div class="section-header">
+              <h2 class="section-title"><i class="bi bi-truck me-2"></i>Shipping Address</h2>
+            </div>
+            <div class="form-row mb-3">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control guest-input" placeholder="John">
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control guest-input" placeholder="Doe">
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label>Address</label>
+              <input type="text" class="form-control guest-input" placeholder="Apartment, suite, etc.">
+            </div>
+            <div class="form-row mb-3">
+              <div class="form-group">
+                <label>City</label>
+                <input type="text" class="form-control guest-input" placeholder="New York">
+              </div>
+              <div class="form-group">
+                <label>Postal Code</label>
+                <input type="text" class="form-control guest-input" placeholder="10001">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="text" class="form-control guest-input" placeholder="+1 (555) 000-0000">
+            </div>
+          </div>
+
+          <!-- Delivery Method Section (Guest Only) -->
+          <div class="checkout-section guest-only">
+            <div class="section-header">
+              <h2 class="section-title"><i class="bi bi-box-seam me-2"></i>Delivery Method</h2>
+            </div>
+            <div class="delivery-options">
+              <div class="delivery-option active">
+                <div class="d-flex align-items-center gap-3 w-100">
+                  <input type="radio" id="delivery-standard" name="delivery-method" checked>
+                  <label for="delivery-standard" class="delivery-label flex-grow-1">
+                    <span class="delivery-name">Standard Shipping</span>
+                    <span class="delivery-desc">3-5 Business Days</span>
+                  </label>
+                  <span class="delivery-price">FREE</span>
+                </div>
+              </div>
+              <div class="delivery-option">
+                <div class="d-flex align-items-center gap-3 w-100">
+                  <input type="radio" id="delivery-express" name="delivery-method">
+                  <label for="delivery-express" class="delivery-label flex-grow-1">
+                    <span class="delivery-name">Express Delivery</span>
+                    <span class="delivery-desc">Next Day Delivery</span>
+                  </label>
+                  <span class="delivery-price">$15.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Details Section (Guest Only) -->
+          <div class="checkout-section guest-only">
+            <div class="section-header">
+              <h2 class="section-title"><i class="bi bi-credit-card-2-front me-2"></i>Payment Details</h2>
+            </div>
+            
+            <div class="payment-tabs mb-4">
+              <button class="payment-tab active" id="tab-credit-card" type="button">
+                <i class="bi bi-credit-card"></i> Credit Card
+              </button>
+              <button class="payment-tab" id="tab-upi-wallet" type="button">
+                <i class="bi bi-wallet2"></i> UPI / Wallet
+              </button>
+            </div>
+
+            <!-- Credit Card Form -->
+            <div id="guest-credit-card-form">
+              <div class="form-group mb-3">
+                <label>Card Number</label>
+                <div class="input-icon-wrapper">
+                  <input type="text" class="form-control guest-input" placeholder="0000 0000 0000 0000">
+                  <i class="bi bi-credit-card"></i>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Expiry Date</label>
+                  <input type="text" class="form-control guest-input" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="text" class="form-control guest-input" placeholder="123">
+                </div>
+              </div>
+            </div>
+
+            <!-- UPI / Wallet Placeholder -->
+            <div id="guest-upi-form" style="display: none;">
+              <div class="upi-placeholder text-center p-4 border border-secondary rounded" style="border-style: dashed !important; border-color: rgba(255,255,255,0.15) !important;">
+                <i class="bi bi-qr-code-scan" style="font-size: 3rem; color: #4d7fff;"></i>
+                <p class="mt-2 mb-0" style="font-size: 1.4rem; color: #bbb;">Select your UPI app or scan QR at next step</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Right Column - Sidebar -->
         <div class="checkout-sidebar">
-          <!-- Payment Options -->
-          <div class="payment-section">
+          <!-- Payment Options (Logged-in Only) -->
+          <div class="payment-section logged-in-only" style="display: none;">
             <div class="payment-section-title">
               <i class="bi bi-credit-card"></i>
               PAYMENT OPTIONS
@@ -219,8 +367,8 @@
             </div>
           </div>
 
-          <!-- Price Details -->
-          <div class="price-section">
+          <!-- Price Details (Logged-in Only) -->
+          <div class="price-section logged-in-only" style="display: none;">
             <h3 class="price-section-title">PRICE DETAILS</h3>
 
             <div class="price-line">
@@ -253,10 +401,186 @@
               Safe and Secure Payments. Easy returns.
             </div>
           </div>
+
+          <!-- Guest Order Summary (Guest Only) -->
+          <div class="price-section guest-only">
+            <h3 class="price-section-title" style="margin-bottom: 2rem;">Order Summary</h3>
+            
+            <div class="guest-order-items mb-4" style="border-bottom: 1px solid #2a2a2a; padding-bottom: 1.6rem;">
+              <!-- Guest Item 1 -->
+              <div class="sidebar-item d-flex gap-3 mb-3">
+                <div class="sidebar-item-img" style="width: 6.4rem; height: 6.4rem; border-radius: 0.8rem; overflow: hidden; background: #2a2a2a; flex-shrink: 0;">
+                  <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=150&q=80" alt="Titan Laptop Pro" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="sidebar-item-info flex-grow-1">
+                  <div class="sidebar-item-name" style="font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem;">Titan Laptop Pro</div>
+                  <div class="sidebar-item-specs" style="font-size: 1.1rem; color: #777; margin-bottom: 0.4rem;">Space Gray | 1TB SSD</div>
+                  <div class="sidebar-item-qty" style="font-size: 1.1rem; color: #999;">Qty: 1</div>
+                </div>
+                <div class="sidebar-item-price text-end" style="font-size: 1.3rem; font-weight: 700; color: #fff;">$1,499.00</div>
+              </div>
+
+              <!-- Guest Item 2 -->
+              <div class="sidebar-item d-flex gap-3">
+                <div class="sidebar-item-img" style="width: 6.4rem; height: 6.4rem; border-radius: 0.8rem; overflow: hidden; background: #2a2a2a; flex-shrink: 0;">
+                  <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=150&q=80" alt="SonicSync Earbuds" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="sidebar-item-info flex-grow-1">
+                  <div class="sidebar-item-name" style="font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem;">SonicSync Earbuds</div>
+                  <div class="sidebar-item-specs" style="font-size: 1.1rem; color: #777; margin-bottom: 0.4rem;">Obsidian Black</div>
+                  <div class="sidebar-item-qty" style="font-size: 1.1rem; color: #999;">Qty: 1</div>
+                </div>
+                <div class="sidebar-item-price text-end" style="font-size: 1.3rem; font-weight: 700; color: #fff;">$129.00</div>
+              </div>
+            </div>
+
+            <div class="price-line">
+              <span class="price-label">Subtotal</span>
+              <span class="price-value" id="guest-subtotal">$1,628.00</span>
+            </div>
+
+            <div class="price-line">
+              <span class="price-label">Shipping</span>
+              <span class="price-value free" id="guest-shipping">FREE</span>
+            </div>
+
+            <div class="price-line">
+              <span class="price-label">Estimated Tax</span>
+              <span class="price-value" id="guest-tax">$130.24</span>
+            </div>
+
+            <div class="price-total">
+              <span class="price-total-label">Total</span>
+              <span class="price-total-value guest-total-amount" id="guest-total">$1,758.24</span>
+            </div>
+
+            <button class="confirm-btn guest-purchase-btn" style="background: #ff6b35;">
+              Complete Purchase
+              <i class="bi bi-lock-fill"></i>
+            </button>
+
+            <div class="security-message" style="text-transform: uppercase; font-size: 1rem; font-weight: 700; letter-spacing: 0.5px;">
+              <i class="bi bi-shield-lock-fill"></i>
+              Secure Encrypted Checkout
+            </div>
+          </div>
+
+          <!-- Promo Code Card (Guest Only) -->
+          <div class="price-section guest-only mt-3">
+            <div class="promo-box d-flex gap-2">
+              <input type="text" class="form-control promo-input flex-grow-1" placeholder="Promo code">
+              <button class="btn btn-outline-light promo-btn" type="button">Apply</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- ===== Add New Address Modal ===== -->
+  <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content address-modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header address-modal-header">
+          <h5 class="modal-title address-modal-title" id="addAddressModalLabel">Add New Address</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body address-modal-body">
+          <form id="addAddressForm" novalidate>
+
+            <!-- Row 1: Full Name + Phone -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="addr-label">FULL NAME</label>
+                <input type="text" id="addr-fullname" class="form-control addr-input" placeholder="e.g. Alex Rivers">
+              </div>
+              <div class="col-md-6">
+                <label class="addr-label">PHONE NUMBER</label>
+                <input type="tel" id="addr-phone" class="form-control addr-input" placeholder="10-digit mobile number">
+              </div>
+            </div>
+
+            <!-- Row 2: Pin Code + Locality -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="addr-label">PIN CODE (ZIP CODE)</label>
+                <input type="text" id="addr-pincode" class="form-control addr-input" placeholder="6-digit code">
+              </div>
+              <div class="col-md-6">
+                <label class="addr-label">LOCALITY</label>
+                <input type="text" id="addr-locality" class="form-control addr-input" placeholder="e.g. Sector 12, Area">
+              </div>
+            </div>
+
+            <!-- Row 3: Address textarea -->
+            <div class="mb-3">
+              <label class="addr-label">ADDRESS (AREA AND STREET)</label>
+              <textarea id="addr-street" class="form-control addr-input addr-textarea" rows="3" placeholder="Flat, House no., Building, Company, Apartment"></textarea>
+            </div>
+
+            <!-- Row 4: City + State -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="addr-label">CITY / DISTRICT / TOWN</label>
+                <input type="text" id="addr-city" class="form-control addr-input" placeholder="Enter City">
+              </div>
+              <div class="col-md-6">
+                <label class="addr-label">STATE</label>
+                <select id="addr-state" class="form-select addr-input">
+                  <option value="">Select State</option>
+                  <option>Andhra Pradesh</option>
+                  <option>California</option>
+                  <option>Delhi</option>
+                  <option>Gujarat</option>
+                  <option>Karnataka</option>
+                  <option>Maharashtra</option>
+                  <option>New York</option>
+                  <option>Rajasthan</option>
+                  <option>Tamil Nadu</option>
+                  <option>Texas</option>
+                  <option>Uttar Pradesh</option>
+                  <option>West Bengal</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Address Type -->
+            <div class="mb-3">
+              <label class="addr-label">ADDRESS TYPE</label>
+              <div class="d-flex gap-3 mt-2">
+                <button type="button" class="addr-type-btn active" data-type="HOME">
+                  <i class="bi bi-house-door"></i> Home
+                </button>
+                <button type="button" class="addr-type-btn" data-type="WORK/OFFICE">
+                  <i class="bi bi-briefcase"></i> Work/Office
+                </button>
+              </div>
+            </div>
+
+            <!-- Default Address Checkbox -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="addr-default">
+              <label class="form-check-label" for="addr-default" style="color: #aaa; font-size: 1.3rem;">
+                Set as Default Address
+              </label>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer address-modal-footer">
+          <button type="button" class="btn addr-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn addr-save-btn" id="saveAddressBtn">Save Address</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container">
@@ -333,7 +657,49 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
   <script>
-    // Quantity controls
+    // Checkout mode switching logic
+    function setCheckoutMode(mode) {
+      if (mode === 'logged-in') {
+        document.body.classList.remove('checkout-mode-guest');
+        document.body.classList.add('checkout-mode-logged-in');
+        document.getElementById('toggle-logged-in').classList.add('active');
+        document.getElementById('toggle-guest').classList.remove('active');
+        
+        document.querySelectorAll('.logged-in-only').forEach(el => el.style.display = '');
+        document.querySelectorAll('.guest-only').forEach(el => el.style.display = 'none');
+      } else {
+        document.body.classList.remove('checkout-mode-logged-in');
+        document.body.classList.add('checkout-mode-guest');
+        document.getElementById('toggle-guest').classList.add('active');
+        document.getElementById('toggle-logged-in').classList.remove('active');
+        
+        document.querySelectorAll('.logged-in-only').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.guest-only').forEach(el => el.style.display = '');
+      }
+    }
+
+    // Toggle button click listeners
+    document.getElementById('toggle-logged-in').addEventListener('click', () => setCheckoutMode('logged-in'));
+    document.getElementById('toggle-guest').addEventListener('click', () => setCheckoutMode('guest'));
+
+    // Cross-navigation link listeners
+    const loginChangeBtn = document.getElementById('login-change-btn');
+    if (loginChangeBtn) {
+      loginChangeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        setCheckoutMode('guest');
+      });
+    }
+
+    const linkLoginFaster = document.getElementById('link-login-faster');
+    if (linkLoginFaster) {
+      linkLoginFaster.addEventListener('click', function(e) {
+        e.preventDefault();
+        setCheckoutMode('logged-in');
+      });
+    }
+
+    // Quantity controls (Logged-in summary)
     document.querySelectorAll('.qty-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         const valueSpan = this.parentElement.querySelector('.qty-value');
@@ -349,7 +715,7 @@
       });
     });
 
-    // Remove item
+    // Remove item (Logged-in summary)
     document.querySelectorAll('.remove-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         this.closest('.order-item').style.display = 'none';
@@ -357,12 +723,76 @@
       });
     });
 
-    // Add new address
-    document.querySelector('.add-address').addEventListener('click', function() {
-      alert('Add new address form would open here');
+    // Address Type toggle (Home / Work)
+    const addrTypeBtns = document.querySelectorAll('.addr-type-btn');
+    addrTypeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        addrTypeBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
     });
 
-    // Payment option selection
+    // Save Address button in modal
+    const saveAddressBtn = document.getElementById('saveAddressBtn');
+    if (saveAddressBtn) {
+      saveAddressBtn.addEventListener('click', function() {
+        const name = document.getElementById('addr-fullname').value.trim();
+        const phone = document.getElementById('addr-phone').value.trim();
+        const pincode = document.getElementById('addr-pincode').value.trim();
+        const locality = document.getElementById('addr-locality').value.trim();
+        const address = document.getElementById('addr-street').value.trim();
+        const city = document.getElementById('addr-city').value.trim();
+        const state = document.getElementById('addr-state').value;
+
+        if (!name || !phone || !pincode || !address || !city || !state) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+
+        const activeType = document.querySelector('.addr-type-btn.active');
+        const addrType = activeType ? activeType.dataset.type : 'HOME';
+        const isDefault = document.getElementById('addr-default').checked;
+
+        // Build new address card and inject into delivery-content
+        const deliveryContent = document.querySelector('.delivery-content');
+        const addAddressDiv = document.querySelector('.add-address');
+        const newCard = document.createElement('div');
+        newCard.classList.add('address-card');
+        if (isDefault) newCard.style.borderColor = '#4d7fff';
+        newCard.innerHTML = `
+          <button class="addr-delete-btn" title="Delete address"><i class="bi bi-trash3"></i></button>
+          <div class="address-type">${addrType}</div>
+          <div class="address-name">${name}</div>
+          <div class="address-text">${address}<br>${locality ? locality + ', ' : ''}${city} - ${pincode}</div>
+          <div class="address-phone">${phone}</div>
+          <button class="deliver-btn">Deliver Here</button>
+        `;
+        deliveryContent.insertBefore(newCard, addAddressDiv);
+
+        // Close modal and reset form
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addAddressModal'));
+        if (modal) modal.hide();
+        document.getElementById('addAddressForm').reset();
+        addrTypeBtns.forEach(b => b.classList.remove('active'));
+        document.querySelector('.addr-type-btn[data-type="HOME"]').classList.add('active');
+      });
+    }
+    // Delete address — event delegation on delivery-content
+    const deliveryContent = document.querySelector('.delivery-content');
+    if (deliveryContent) {
+      deliveryContent.addEventListener('click', function(e) {
+        const deleteBtn = e.target.closest('.addr-delete-btn');
+        if (!deleteBtn) return;
+        const card = deleteBtn.closest('.address-card');
+        if (!card) return;
+        // Animate out then remove
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => card.remove(), 320);
+      });
+    }
+
     document.querySelectorAll('input[name="payment"]').forEach(radio => {
       radio.addEventListener('change', function() {
         document.querySelectorAll('.payment-option').forEach(opt => {
@@ -374,16 +804,125 @@
       });
     });
 
-    // Confirm order
-    document.querySelector('.confirm-btn').addEventListener('click', function() {
-      alert('Order confirmed! Thank you for your purchase.');
+    // Confirm order (Logged-in view)
+    const confirmBtn = document.querySelector('.confirm-btn:not(.guest-purchase-btn):not(.promo-btn)');
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', function() {
+        alert('Order confirmed! Thank you for your purchase.');
+      });
+    }
+
+    // --- Guest Specific Interactive Logic ---
+
+    // Guest shipping method radio selector
+    const deliveryOptions = document.querySelectorAll('.delivery-option');
+    deliveryOptions.forEach(opt => {
+      opt.addEventListener('click', function() {
+        deliveryOptions.forEach(o => {
+          o.classList.remove('active');
+          o.querySelector('input[type="radio"]').checked = false;
+        });
+        
+        this.classList.add('active');
+        const radio = this.querySelector('input[type="radio"]');
+        radio.checked = true;
+        
+        updateGuestTotals();
+      });
     });
 
-    // Change login
-    document.querySelector('.section-action').addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('Change login/account form would open here');
-    });
+    // Calculate Guest Totals with or without discount
+    let guestDiscountApplied = false;
+    function updateGuestTotals() {
+      const isExpress = document.getElementById('delivery-express').checked;
+      const baseSubtotal = 1628.00;
+      const discount = guestDiscountApplied ? 162.80 : 0.00;
+      const finalSubtotal = baseSubtotal - discount;
+      const shippingCost = isExpress ? 15.00 : 0.00;
+      const tax = parseFloat((finalSubtotal * 0.08).toFixed(2));
+      const total = finalSubtotal + shippingCost + tax;
+      
+      // Update Subtotal element
+      if (guestDiscountApplied) {
+        document.getElementById('guest-subtotal').innerHTML = `<span style="text-decoration: line-through; color: #777;">$1,628.00</span> <span style="color: #4dff4d;">$${finalSubtotal.toFixed(2)}</span>`;
+      } else {
+        document.getElementById('guest-subtotal').textContent = `$${baseSubtotal.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      }
+
+      // Update Shipping element
+      const shippingEl = document.getElementById('guest-shipping');
+      if (isExpress) {
+        shippingEl.textContent = `$${shippingCost.toFixed(2)}`;
+        shippingEl.classList.remove('free');
+        shippingEl.style.color = '#fff';
+      } else {
+        shippingEl.textContent = 'FREE';
+        shippingEl.classList.add('free');
+        shippingEl.style.color = '#4dff4d';
+      }
+      
+      document.getElementById('guest-tax').textContent = `$${tax.toFixed(2)}`;
+      document.getElementById('guest-total').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // Guest Payment Tabs switcher
+    const tabCreditCard = document.getElementById('tab-credit-card');
+    const tabUpiWallet = document.getElementById('tab-upi-wallet');
+    const guestCreditForm = document.getElementById('guest-credit-card-form');
+    const guestUpiForm = document.getElementById('guest-upi-form');
+
+    if (tabCreditCard && tabUpiWallet) {
+      tabCreditCard.addEventListener('click', function() {
+        tabCreditCard.classList.add('active');
+        tabUpiWallet.classList.remove('active');
+        guestCreditForm.style.display = 'block';
+        guestUpiForm.style.display = 'none';
+      });
+
+      tabUpiWallet.addEventListener('click', function() {
+        tabUpiWallet.classList.add('active');
+        tabCreditCard.classList.remove('active');
+        guestCreditForm.style.display = 'none';
+        guestUpiForm.style.display = 'block';
+      });
+    }
+
+    // Promo Code Application
+    const promoBtn = document.querySelector('.promo-btn');
+    const promoInput = document.querySelector('.promo-input');
+    if (promoBtn && promoInput) {
+      promoBtn.addEventListener('click', function() {
+        const code = promoInput.value.trim().toUpperCase();
+        if (code === '') {
+          alert('Please enter a promo code.');
+          return;
+        }
+        if (code === 'WELCOME10' || code === 'PRIME10') {
+          alert('Promo code applied successfully! You received a 10% discount.');
+          guestDiscountApplied = true;
+          updateGuestTotals();
+          
+          promoInput.disabled = true;
+          promoBtn.disabled = true;
+          promoBtn.textContent = 'Applied';
+          promoBtn.style.borderColor = '#4dff4d';
+          promoBtn.style.color = '#4dff4d';
+        } else {
+          alert('Invalid promo code. Try "PRIME10" or "WELCOME10".');
+        }
+      });
+    }
+
+    // Guest Complete Purchase click event
+    const guestPurchaseBtn = document.querySelector('.guest-purchase-btn');
+    if (guestPurchaseBtn) {
+      guestPurchaseBtn.addEventListener('click', function() {
+        alert('Complete Purchase clicked! Processing guest payment...');
+      });
+    }
+
+    // Initialize display state - show guest mode by default
+    setCheckoutMode('guest');
   </script>
 </body>
 </html>
