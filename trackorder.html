@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track Your Order - ShopPrime</title>
+  <meta name="description" content="Track your ShopPrime order in real time. View delivery progress, shipment details, and activity log.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+
+  <style>
+    /* ── Page base ───────────────────────────────────────────── */
+    .to-page {
+      padding: 3.6rem 0 6rem;
+    }
+
+    /* ── Breadcrumb ──────────────────────────────────────────── */
+    .to-breadcrumb {
+      font-size: 1.3rem;
+      color: #666;
+      margin-bottom: 2.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .to-breadcrumb a {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .to-breadcrumb a:hover {
+      color: #aaa;
+    }
+
+    .to-breadcrumb i {
+      font-size: 1.1rem;
+    }
+
+    /* ── Page title row ─────────────────────────────────────── */
+    .to-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      margin-bottom: 3.2rem;
+    }
+
+    .to-title-row h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 1rem;
+    }
+
+    .to-order-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      flex-wrap: wrap;
+    }
+
+    .to-order-id-badge {
+      background: #233260;
+      color: #6a9fff;
+      font-size: 1.25rem;
+      font-weight: 600;
+      padding: 0.45rem 1.2rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(77, 127, 255, 0.25);
+    }
+
+    .to-order-date {
+      font-size: 1.35rem;
+      color: #888;
+    }
+
+    .to-est-delivery {
+      text-align: right;
+    }
+
+    .to-est-label {
+      font-size: 1.15rem;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .to-est-date {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ── Progress tracker card ──────────────────────────────── */
+    .to-tracker-card {
+      background: #1a1a1e;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.6rem;
+      padding: 3.2rem 3.6rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .to-steps {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    /* connecting line behind the icons */
+    .to-steps::before {
+      content: '';
+      position: absolute;
+      top: 2.4rem;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 3px;
+      background: #2e2e35;
+      z-index: 0;
+    }
+
+    /* coloured fill up to active step */
+    .to-steps::after {
+      content: '';
+      position: absolute;
+      top: 2.4rem;
+      left: calc(12.5%);
+      width: calc(37.5%);   /* 0→1 segment + 1→2 segment = shipped */
+      height: 3px;
+      background: linear-gradient(90deg, #4d7fff, #6a9fff);
+      z-index: 0;
+    }
+
+    .to-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .to-step-icon {
+      width: 4.8rem;
+      height: 4.8rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+      margin-bottom: 1.2rem;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .to-step-icon.done {
+      background: #233260;
+      border-color: #4d7fff;
+      color: #4d7fff;
+    }
+
+    .to-step-icon.active {
+      background: #4d7fff;
+      border-color: #6a9fff;
+      color: #fff;
+      box-shadow: 0 0 0 6px rgba(77, 127, 255, 0.18);
+    }
+
+    .to-step-icon.pending {
+      background: #1e1e24;
+      border-color: #333;
+      color: #555;
+    }
+
+    .to-step-label {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.3rem;
+      text-align: center;
+    }
+
+    .to-step-label.pending-text {
+      color: #555;
+    }
+
+    .to-step-date {
+      font-size: 1.2rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .to-step-date.highlight {
+      color: #4d7fff;
+      font-weight: 500;
+    }
+
+    /* ── Two-column layout ──────────────────────────────────── */
+    .to-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2.4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 991px) {
+      .to-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Left: map + activity card ──────────────────────────── */
+    .to-map-card {
+      background: #1a1a1e;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.6rem;
+      overflow: hidden;
+    }
+
+    .to-map-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.8rem 2.2rem 1.4rem;
+    }
+
+    .to-map-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .to-map-title i {
+      color: #4d7fff;
+    }
+
+    .to-on-schedule {
+      background: #1b3a1a;
+      color: #4dff4d;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.4rem 1.1rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(77, 255, 77, 0.2);
+      letter-spacing: 0.02em;
+    }
+
+    /* fake dark map visual */
+    .to-map-visual {
+      position: relative;
+      height: 22rem;
+      background:
+        radial-gradient(ellipse at 40% 50%, rgba(77, 127, 255, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, #111116 0%, #0d0d10 100%);
+      overflow: hidden;
+    }
+
+    /* grid lines */
+    .to-map-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* road lines */
+    .to-road-h {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .to-road-v {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* route path */
+    .to-map-route {
+      position: absolute;
+      top: 50%; left: 12%;
+      transform: translateY(-50%);
+      width: 76%;
+      height: 4px;
+      background: linear-gradient(90deg, #4d7fff 0%, #6a9fff 60%, rgba(77,127,255,0.2) 100%);
+      border-radius: 2px;
+    }
+
+    .to-map-route::before,
+    .to-map-route::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .to-map-route::before {
+      left: 0;
+      background: #4d7fff;
+      box-shadow: 0 0 0 4px rgba(77,127,255,0.25);
+    }
+
+    .to-map-route::after {
+      right: 0;
+      background: #333;
+      border: 2px solid #555;
+    }
+
+    /* pin marker */
+    .to-map-pin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .to-map-pin-dot {
+      width: 5.2rem;
+      height: 5.2rem;
+      background: #4d7fff;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(77,127,255,0.45);
+    }
+
+    .to-map-pin-dot i {
+      transform: rotate(45deg);
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .to-map-pin-shadow {
+      width: 1.6rem;
+      height: 0.6rem;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      margin-top: 0.3rem;
+      filter: blur(2px);
+    }
+
+    /* last seen label on map */
+    .to-map-last-seen {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      background: rgba(20, 20, 26, 0.92);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      padding: 1.2rem 1.6rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .to-last-seen-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .to-last-seen-place {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .to-last-seen-time {
+      font-size: 1.15rem;
+      color: #666;
+    }
+
+    /* ── Activity log ──────────────────────────────────────── */
+    .to-activity {
+      padding: 2rem 2.2rem 2.4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .to-activity-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #666;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    .to-log-item {
+      display: flex;
+      gap: 1.4rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .to-log-item:last-child {
+      border-bottom: none;
+    }
+
+    .to-log-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .to-log-icon.primary {
+      background: rgba(77,127,255,0.15);
+      color: #4d7fff;
+    }
+
+    .to-log-icon.secondary {
+      background: rgba(255,255,255,0.05);
+      color: #555;
+    }
+
+    .to-log-body {}
+
+    .to-log-time {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ddd;
+      margin-bottom: 0.2rem;
+    }
+
+    .to-log-item:not(:first-child) .to-log-time {
+      color: #777;
+    }
+
+    .to-log-desc {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    /* ── Right sidebar ──────────────────────────────────────── */
+    .to-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .to-card {
+      background: #1a1a1e;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 1.6rem;
+      padding: 2.4rem;
+    }
+
+    .to-card-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    /* shipment items */
+    .to-ship-item {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .to-ship-item:last-of-type {
+      border-bottom: none;
+      margin-bottom: 1.4rem;
+    }
+
+    .to-ship-img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 0.8rem;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #111;
+    }
+
+    .to-ship-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .to-ship-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #e0e0e0;
+      margin-bottom: 0.3rem;
+    }
+
+    .to-ship-meta {
+      font-size: 1.15rem;
+      color: #666;
+    }
+
+    .to-ship-price {
+      margin-left: auto;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    /* price summary lines */
+    .to-price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+      font-size: 1.35rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .to-price-line:last-of-type {
+      border-bottom: none;
+    }
+
+    .to-price-label {
+      color: #888;
+    }
+
+    .to-price-val {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .to-price-val.free {
+      color: #ff9b42;
+      font-weight: 700;
+    }
+
+    .to-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.6rem 0 0;
+      margin-top: 0.6rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .to-total-label {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ccc;
+    }
+
+    .to-total-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* need help card */
+    .to-help-card {
+      background: #1a1a1e;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 1.6rem;
+      padding: 2.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .to-help-card::after {
+      content: '\F504';
+      font-family: 'bootstrap-icons';
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 6rem;
+      color: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+
+    .to-help-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .to-help-title i {
+      color: #aaa;
+    }
+
+    .to-help-text {
+      font-size: 1.3rem;
+      color: #777;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .to-help-btn {
+      display: block;
+      text-align: center;
+      background: #233260;
+      color: #6a9fff;
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding: 1.2rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(77,127,255,0.25);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .to-help-btn:hover {
+      background: #4d7fff;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="position-sticky top-0" style="z-index: 999;">
+    <nav class="navbar navbar-expand-lg navbar-dark top-nav px-3 px-lg-4 py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">ShopPrime</a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+          <a class="btn icon-btn" href="#"><i class="bi bi-person"></i></a>
+          <a class="btn icon-btn" href="#"><i class="bi bi-heart"></i></a>
+          <a class="btn icon-btn" href="cart.html"><i class="bi bi-cart3"></i></a>
+          <button class="btn icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <form class="search-wrap mx-lg-auto my-3 my-lg-0">
+            <i class="bi bi-search"></i>
+            <input class="form-control" type="search" placeholder="Search for products, brands and more">
+          </form>
+          <ul class="navbar-nav d-flex align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="shop.html">Electronics</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Fashion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Beauty</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileMenuLabel">ShopPrime</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="search-wrap mb-4">
+          <i class="bi bi-search"></i>
+          <input class="form-control" type="search" placeholder="Search everything">
+        </form>
+        <div class="list-group list-group-flush mobile-links">
+          <a href="shop.html" class="list-group-item list-group-item-action">Electronics</a>
+          <a href="#" class="list-group-item list-group-item-action">Fashion</a>
+          <a href="#" class="list-group-item list-group-item-action">Home</a>
+          <a href="#" class="list-group-item list-group-item-action">Beauty</a>
+          <a href="cart.html" class="list-group-item list-group-item-action">Cart</a>
+          <a href="#" class="list-group-item list-group-item-action">Deals</a>
+          <a href="#" class="list-group-item list-group-item-action">Support</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main ───────────────────────────────────────────────── -->
+  <main>
+    <div class="container to-page">
+
+      <!-- Breadcrumb -->
+      <nav class="to-breadcrumb" aria-label="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="bi bi-chevron-right"></i>
+        <span>Track Order</span>
+      </nav>
+
+      <!-- Title row -->
+      <div class="to-title-row">
+        <div>
+          <h1>Track Your Order</h1>
+          <div class="to-order-meta">
+            <span class="to-order-id-badge">Order ID: #SP-98234</span>
+            <span class="to-order-date">Order Date: Oct 24, 2023</span>
+          </div>
+        </div>
+        <div class="to-est-delivery">
+          <div class="to-est-label">Estimated Delivery</div>
+          <div class="to-est-date">Thursday, Oct 28, 2023</div>
+        </div>
+      </div>
+
+      <!-- Progress tracker card -->
+      <div class="to-tracker-card">
+        <div class="to-steps" id="toSteps">
+
+          <!-- Step 1: Ordered -->
+          <div class="to-step">
+            <div class="to-step-icon done">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <div class="to-step-label">Ordered</div>
+            <div class="to-step-date">Oct 24</div>
+          </div>
+
+          <!-- Step 2: Shipped -->
+          <div class="to-step">
+            <div class="to-step-icon done">
+              <i class="bi bi-truck"></i>
+            </div>
+            <div class="to-step-label">Shipped</div>
+            <div class="to-step-date">Oct 25</div>
+          </div>
+
+          <!-- Step 3: In Transit (active) -->
+          <div class="to-step">
+            <div class="to-step-icon active">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <div class="to-step-label">In Transit</div>
+            <div class="to-step-date highlight">Today</div>
+          </div>
+
+          <!-- Step 4: Delivered -->
+          <div class="to-step">
+            <div class="to-step-icon pending">
+              <i class="bi bi-house-door"></i>
+            </div>
+            <div class="to-step-label pending-text">Delivered</div>
+            <div class="to-step-date">Pending</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="to-layout">
+
+        <!-- LEFT: Map + Activity -->
+        <div class="to-map-card">
+          <div class="to-map-header">
+            <div class="to-map-title">
+              <i class="bi bi-geo-alt-fill"></i>
+              Arriving Today
+            </div>
+            <span class="to-on-schedule">On Schedule</span>
+          </div>
+
+          <!-- Map visual -->
+          <div class="to-map-visual">
+            <!-- decorative roads -->
+            <div class="to-road-h" style="top: 30%;"></div>
+            <div class="to-road-h" style="top: 55%;"></div>
+            <div class="to-road-h" style="top: 78%;"></div>
+            <div class="to-road-v" style="left: 20%;"></div>
+            <div class="to-road-v" style="left: 50%;"></div>
+            <div class="to-road-v" style="left: 75%;"></div>
+
+            <!-- route line -->
+            <div class="to-map-route"></div>
+
+            <!-- pin marker -->
+            <div class="to-map-pin">
+              <div class="to-map-pin-dot">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div class="to-map-pin-shadow"></div>
+            </div>
+
+            <!-- last seen label -->
+            <div class="to-map-last-seen">
+              <div class="to-last-seen-label">Last Seen</div>
+              <div class="to-last-seen-place">Regional Sorting Facility, North District</div>
+              <div class="to-last-seen-time">Updated 12 mins ago</div>
+            </div>
+          </div>
+
+          <!-- Activity Log -->
+          <div class="to-activity">
+            <div class="to-activity-title">Activity Log</div>
+
+            <div class="to-log-item">
+              <div class="to-log-icon primary">
+                <i class="bi bi-truck"></i>
+              </div>
+              <div class="to-log-body">
+                <div class="to-log-time">10:30 AM: Package arrived at local facility</div>
+                <div class="to-log-desc">Sorting and dispatch preparation</div>
+              </div>
+            </div>
+
+            <div class="to-log-item">
+              <div class="to-log-icon secondary">
+                <i class="bi bi-circle-fill" style="font-size: 0.6rem;"></i>
+              </div>
+              <div class="to-log-body">
+                <div class="to-log-time">08:15 AM: Departed distribution center</div>
+                <div class="to-log-desc">In transit to regional hub</div>
+              </div>
+            </div>
+
+            <div class="to-log-item">
+              <div class="to-log-icon secondary">
+                <i class="bi bi-circle-fill" style="font-size: 0.6rem;"></i>
+              </div>
+              <div class="to-log-body">
+                <div class="to-log-time">04:00 AM: Processed through sorting center</div>
+                <div class="to-log-desc">Main sorting hub - West Point</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: Sidebar -->
+        <div class="to-sidebar">
+
+          <!-- In This Shipment -->
+          <div class="to-card">
+            <div class="to-card-title">In This Shipment</div>
+
+            <div class="to-ship-item">
+              <div class="to-ship-img">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=100&q=80" alt="PrimeX Wireless Headphones">
+              </div>
+              <div>
+                <div class="to-ship-name">PrimeX Wireless Headphones</div>
+                <div class="to-ship-meta">Qty: 1 &bull; Midnight Black</div>
+                <div class="to-ship-meta" style="color: #aaa; margin-top: 0.2rem;">$299.00</div>
+              </div>
+            </div>
+
+            <div class="to-ship-item">
+              <div class="to-ship-img">
+                <img src="https://images.unsplash.com/photo-1527443224154-c4a573d5f5ec?auto=format&fit=crop&w=100&q=80" alt="TechMaster 4K Monitor">
+              </div>
+              <div>
+                <div class="to-ship-name">TechMaster 4K Monitor</div>
+                <div class="to-ship-meta">Qty: 1 &bull; Ultra-Wide 32"</div>
+                <div class="to-ship-meta" style="color: #aaa; margin-top: 0.2rem;">$449.00</div>
+              </div>
+            </div>
+
+            <div class="to-price-line">
+              <span class="to-price-label">Subtotal</span>
+              <span class="to-price-val">$748.00</span>
+            </div>
+            <div class="to-price-line">
+              <span class="to-price-label">Shipping</span>
+              <span class="to-price-val free">FREE</span>
+            </div>
+
+            <div class="to-total-row">
+              <span class="to-total-label">Total</span>
+              <span class="to-total-val">$748.00</span>
+            </div>
+          </div>
+
+          <!-- Need Help -->
+          <div class="to-help-card">
+            <div class="to-help-title">
+              <i class="bi bi-question-circle-fill"></i>
+              Need Help?
+            </div>
+            <p class="to-help-text">
+              Encountering issues with your delivery or have a question about your order? Our support team is here 24/7.
+            </p>
+            <a href="#" class="to-help-btn">Visit Help Center</a>
+          </div>
+
+        </div>
+      </div><!-- end to-layout -->
+
+    </div><!-- end container -->
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 align-items-start">
+        <div class="col-12 col-lg-6">
+          <div class="footer-brand">
+            <h3>ShopPrime</h3>
+            <p>The premium destination for the modern technologist. We curate elite hardware and accessories designed to
+              elevate your digital lifestyle. Quality isn't an option; it's our standard.</p>
+            <div class="d-flex gap-4 social-links">
+              <a href="#" aria-label="Globe"><i class="bi bi-globe-americas"></i></a>
+              <a href="#" aria-label="At"><i class="bi bi-at"></i></a>
+              <a href="#" aria-label="Chat"><i class="bi bi-chat-square-text"></i></a>
+              <a href="#" aria-label="Share"><i class="bi bi-share"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="row g-4">
+            <div class="col-4">
+              <h4>Shopping</h4>
+              <ul class="list-unstyled">
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="#">Flash Deals</a></li>
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">Smart Home</a></li>
+                <li><a href="#">Gaming Elite</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <h4>Support</h4>
+              <ul class="list-unstyled">
+                <li><a href="trackorder.html">Order Tracking</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns &amp; Exchanges</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <h4>Company</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">About Our Brand</a></li>
+                <li><a href="#">Sustainability</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Media</a></li>
+                <li><a href="#">Investors</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-meta">
+          <div class="footer-meta-left">
+            <span>&copy; 2024 ShopPrime. All rights reserved.</span>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Cookies</a>
+            <a href="#">Sitemap</a>
+          </div>
+          <div class="footer-meta-right">
+            <a href="#" aria-label="Card"><i class="bi bi-credit-card"></i></a>
+            <a href="#" aria-label="Payment"><i class="bi bi-wallet2"></i></a>
+            <a href="#" aria-label="Security"><i class="bi bi-patch-check"></i></a>
+            <a href="#" aria-label="Shield"><i class="bi bi-shield-check"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

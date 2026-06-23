@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,8 @@
   <meta name="description" content="Your order has been placed successfully. Thank you for shopping with ShopPrime.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -20,7 +22,8 @@
       background: #0a0a0a;
       color: #fff;
       font-family: "Inter", sans-serif;
-      font-size: 10px; /* rem base */
+      font-size: 10px;
+      /* rem base */
     }
 
     /* ---- Hero ---- */
@@ -43,8 +46,15 @@
     }
 
     @keyframes popIn {
-      from { transform: scale(0); opacity: 0; }
-      to   { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .ty-check-circle i {
@@ -87,7 +97,9 @@
     }
 
     @media (max-width: 992px) {
-      .ty-grid { grid-template-columns: 1fr; }
+      .ty-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ---- Cards ---- */
@@ -118,6 +130,10 @@
       margin-bottom: 2rem;
     }
 
+    .ty-delivery-banner-text {
+      flex: 1;
+    }
+
     .ty-delivery-banner-text h2 {
       font-size: 1.7rem;
       font-weight: 700;
@@ -141,6 +157,8 @@
     .ty-progress-wrap {
       margin-top: 2rem;
       position: relative;
+      padding: 0 3rem;
+      /* Prevents text clipping and aligns labels perfectly */
     }
 
     .ty-progress-track {
@@ -148,12 +166,13 @@
       background: #2a2a2a;
       border-radius: 2px;
       position: relative;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
     }
 
     .ty-progress-fill {
       height: 100%;
-      width: 16%;  /* at "Confirmed" step */
+      width: 16%;
+      /* at "Confirmed" step */
       background: linear-gradient(90deg, #4d7fff, #6a9fff);
       border-radius: 2px;
       transition: width 1.5s ease;
@@ -183,16 +202,17 @@
     }
 
     .ty-progress-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.8rem;
+      position: relative;
+      height: 2rem;
+      margin-top: 1.2rem;
     }
 
     .ty-progress-label {
+      position: absolute;
+      top: 0;
       font-size: 1.1rem;
       color: #555;
-      text-align: center;
-      flex: 1;
+      white-space: nowrap;
     }
 
     .ty-progress-label.active {
@@ -214,7 +234,7 @@
       align-items: center;
       gap: 1.6rem;
       padding: 1.6rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .ty-item:last-child {
@@ -278,7 +298,9 @@
     }
 
     @media (max-width: 600px) {
-      .ty-info-row { grid-template-columns: 1fr; }
+      .ty-info-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     .ty-info-card {
@@ -366,16 +388,25 @@
       align-items: center;
       padding: 0.9rem 0;
       font-size: 1.3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .ty-price-line:last-of-type {
       border-bottom: none;
     }
 
-    .ty-price-label { color: #888; }
-    .ty-price-val { color: #fff; font-weight: 600; }
-    .ty-price-val.free { color: #4dff4d; }
+    .ty-price-label {
+      color: #888;
+    }
+
+    .ty-price-val {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .ty-price-val.free {
+      color: #4dff4d;
+    }
 
     .ty-total-row {
       display: flex;
@@ -383,7 +414,7 @@
       align-items: center;
       padding: 1.6rem 0 0;
       margin-top: 0.4rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .ty-total-label {
@@ -452,7 +483,7 @@
       width: 100%;
       background: transparent;
       color: #aaa;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 1.2rem;
       border-radius: 0.8rem;
       font-weight: 600;
@@ -466,7 +497,7 @@
     }
 
     .ty-btn-print:hover {
-      border-color: rgba(255,255,255,0.3);
+      border-color: rgba(255, 255, 255, 0.3);
       color: #fff;
     }
 
@@ -508,13 +539,17 @@
       transition: color 0.2s;
     }
 
-    .ty-help-link:hover { color: #7aa3ff; }
+    .ty-help-link:hover {
+      color: #7aa3ff;
+    }
 
     /* ---- Confetti dots (decorative) ---- */
     .ty-confetti {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       overflow: hidden;
       z-index: 0;
@@ -529,11 +564,19 @@
     }
 
     @keyframes fall {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Confetti container (JS-populated) -->
@@ -544,13 +587,52 @@
     <nav class="navbar navbar-expand-lg navbar-dark top-nav px-3 px-lg-4 py-3">
       <div class="container">
         <a class="navbar-brand fw-bold" href="index.html">ShopPrime</a>
-        <div class="d-flex align-items-center gap-2 ms-auto">
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
           <a class="btn icon-btn" href="#"><i class="bi bi-person"></i></a>
           <a class="btn icon-btn" href="#"><i class="bi bi-heart"></i></a>
           <a class="btn icon-btn" href="cart.html"><i class="bi bi-cart3"></i></a>
+          <button class="btn icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <form class="search-wrap mx-lg-auto my-3 my-lg-0">
+            <i class="bi bi-search"></i>
+            <input class="form-control" type="search" placeholder="Search for products, brands and more">
+          </form>
+          <ul class="navbar-nav d-flex align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="shop.html">Electronics</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Fashion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Beauty</a></li>
+          </ul>
         </div>
       </div>
     </nav>
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileMenuLabel">ShopPrime</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="search-wrap mb-4">
+          <i class="bi bi-search"></i>
+          <input class="form-control" type="search" placeholder="Search everything">
+        </form>
+        <div class="list-group list-group-flush mobile-links">
+          <a href="shop.html" class="list-group-item list-group-item-action">Electronics</a>
+          <a href="#" class="list-group-item list-group-item-action">Fashion</a>
+          <a href="#" class="list-group-item list-group-item-action">Home</a>
+          <a href="#" class="list-group-item list-group-item-action">Beauty</a>
+          <a href="cart.html" class="list-group-item list-group-item-action">Cart</a>
+          <a href="#" class="list-group-item list-group-item-action">Deals</a>
+          <a href="#" class="list-group-item list-group-item-action">Support</a>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main style="position: relative; z-index: 1;">
@@ -575,8 +657,15 @@
           <!-- Delivery banner -->
           <div class="ty-delivery-banner">
             <div class="ty-delivery-banner-text">
-              <h2>Arriving by Friday, May 17th</h2>
-              <p>Standard Shipping &mdash; Track your package below</p>
+              <ul class="d-flex justify-content-between mb-5">
+                <li>
+                  <h2>Arriving by Friday, May 17th</h2>
+                  <p>Standard Shipping &mdash; Track your package below</p>
+                </li>
+                <li>
+                  <i class="bi bi-truck" style="font-size: 2.8rem;"></i>
+                </li>
+              </ul>
 
               <!-- Progress bar -->
               <div class="ty-progress-wrap">
@@ -588,14 +677,13 @@
                   <div class="ty-progress-dot" style="left: 100%;"></div>
                 </div>
                 <div class="ty-progress-labels">
-                  <span class="ty-progress-label active">Confirmed</span>
-                  <span class="ty-progress-label">Preparing</span>
-                  <span class="ty-progress-label">Shipped</span>
-                  <span class="ty-progress-label">Delivered</span>
+                  <span class="ty-progress-label active" style="left: 0%; transform: none;">Confirmed</span>
+                  <span class="ty-progress-label" style="left: 33.3%; transform: translateX(-50%);">Preparing</span>
+                  <span class="ty-progress-label" style="left: 66.6%; transform: translateX(-50%);">Shipped</span>
+                  <span class="ty-progress-label" style="left: 100%; transform: translateX(-100%);">Delivered</span>
                 </div>
               </div>
             </div>
-            <i class="bi bi-truck" style="font-size: 2.8rem;"></i>
           </div>
 
           <!-- Order Items -->
@@ -605,7 +693,8 @@
             <!-- Item 1 -->
             <div class="ty-item">
               <div class="ty-item-img">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80" alt="Vortex Runner X1">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80"
+                  alt="Vortex Runner X1">
               </div>
               <div class="ty-item-info">
                 <div class="ty-item-name">Vortex Runner X1</div>
@@ -618,7 +707,8 @@
             <!-- Item 2 -->
             <div class="ty-item">
               <div class="ty-item-img">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80" alt="Sync Pro Watch S2">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80"
+                  alt="Sync Pro Watch S2">
               </div>
               <div class="ty-item-info">
                 <div class="ty-item-name">Sync Pro Watch S2</div>
@@ -693,7 +783,7 @@
 
           <!-- Action Buttons -->
           <div class="d-flex flex-column gap-3">
-            <a href="#" class="ty-btn-track" id="trackOrderBtn">
+            <a href="trackorder.html" class="ty-btn-track" id="trackOrderBtn">
               Track Order <i class="bi bi-arrow-right"></i>
             </a>
             <a href="index.html" class="ty-btn-shop">
@@ -729,7 +819,8 @@
         <div class="col-12 col-lg-6">
           <div class="footer-brand">
             <h3>ShopPrime</h3>
-            <p>The premium destination for the modern technologist. Quality isn't an option; it's our standard.</p>
+            <p>The premium destination for the modern technologist. We curate elite hardware and accessories designed to
+              elevate your digital lifestyle. Quality isn't an option; it's our standard.</p>
             <div class="d-flex gap-4 social-links">
               <a href="#" aria-label="Globe"><i class="bi bi-globe-americas"></i></a>
               <a href="#" aria-label="At"><i class="bi bi-at"></i></a>
@@ -743,9 +834,11 @@
             <div class="col-4">
               <h4>Shopping</h4>
               <ul class="list-unstyled">
-                <li><a href="index.html">All Products</a></li>
+                <li><a href="shop.html">All Products</a></li>
                 <li><a href="#">Flash Deals</a></li>
                 <li><a href="#">New Releases</a></li>
+                <li><a href="#">Smart Home</a></li>
+                <li><a href="#">Gaming Elite</a></li>
               </ul>
             </div>
             <div class="col-4">
@@ -753,15 +846,19 @@
               <ul class="list-unstyled">
                 <li><a href="#">Order Tracking</a></li>
                 <li><a href="#">Shipping Policy</a></li>
-                <li><a href="#">Returns</a></li>
+                <li><a href="#">Returns &amp; Exchanges</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Contact Us</a></li>
               </ul>
             </div>
             <div class="col-4">
               <h4>Company</h4>
               <ul class="list-unstyled">
-                <li><a href="#">About Us</a></li>
+                <li><a href="#">About Our Brand</a></li>
+                <li><a href="#">Sustainability</a></li>
                 <li><a href="#">Careers</a></li>
-                <li><a href="#">Press</a></li>
+                <li><a href="#">Press Media</a></li>
+                <li><a href="#">Investors</a></li>
               </ul>
             </div>
           </div>
@@ -776,11 +873,13 @@
             <a href="#">Privacy</a>
             <a href="#">Terms</a>
             <a href="#">Cookies</a>
+            <a href="#">Sitemap</a>
           </div>
           <div class="footer-meta-right">
             <a href="#" aria-label="Card"><i class="bi bi-credit-card"></i></a>
             <a href="#" aria-label="Payment"><i class="bi bi-wallet2"></i></a>
-            <a href="#" aria-label="Security"><i class="bi bi-shield-check"></i></a>
+            <a href="#" aria-label="Security"><i class="bi bi-patch-check"></i></a>
+            <a href="#" aria-label="Shield"><i class="bi bi-shield-check"></i></a>
           </div>
         </div>
       </div>
@@ -791,7 +890,7 @@
   <script src="js/script.js"></script>
   <script>
     // ── Confetti burst on load ──────────────────────────────────
-    const colors = ['#4d7fff','#ff6b35','#4dff4d','#ffd700','#ff3b82','#00d4ff'];
+    const colors = ['#4d7fff', '#ff6b35', '#4dff4d', '#ffd700', '#ff3b82', '#00d4ff'];
     const container = document.getElementById('confettiContainer');
 
     function spawnDot() {
@@ -824,7 +923,7 @@
     });
 
     // ── Track Order button (mock) ───────────────────────────────
-    document.getElementById('trackOrderBtn').addEventListener('click', function(e) {
+    document.getElementById('trackOrderBtn').addEventListener('click', function (e) {
       e.preventDefault();
       this.innerHTML = '<i class="bi bi-check-circle-fill"></i> Tracking link sent to your email!';
       this.style.background = '#2a7a2a';
@@ -835,4 +934,5 @@
     });
   </script>
 </body>
+
 </html>
