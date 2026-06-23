@@ -5,10 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Track Your Order - ShopPrime</title>
-  <meta name="description" content="Track your ShopPrime order in real time. View delivery progress, shipment details, and activity log.">
+  <meta name="description"
+    content="Track your ShopPrime order in real time. View delivery progress, shipment details, and activity log.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -133,7 +135,8 @@
       position: absolute;
       top: 2.4rem;
       left: calc(12.5%);
-      width: calc(37.5%);   /* 0→1 segment + 1→2 segment = shipped */
+      width: calc(37.5%);
+      /* 0→1 segment + 1→2 segment = shipped */
       height: 3px;
       background: linear-gradient(90deg, #4d7fff, #6a9fff);
       z-index: 0;
@@ -272,34 +275,37 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
       background-size: 48px 48px;
     }
 
     /* road lines */
     .to-road-h {
       position: absolute;
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       height: 2px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
     }
 
     .to-road-v {
       position: absolute;
-      top: 0; bottom: 0;
+      top: 0;
+      bottom: 0;
       width: 2px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
     }
 
     /* route path */
     .to-map-route {
       position: absolute;
-      top: 50%; left: 12%;
+      top: 50%;
+      left: 12%;
       transform: translateY(-50%);
       width: 76%;
       height: 4px;
-      background: linear-gradient(90deg, #4d7fff 0%, #6a9fff 60%, rgba(77,127,255,0.2) 100%);
+      background: linear-gradient(90deg, #4d7fff 0%, #6a9fff 60%, rgba(77, 127, 255, 0.2) 100%);
       border-radius: 2px;
     }
 
@@ -317,7 +323,7 @@
     .to-map-route::before {
       left: 0;
       background: #4d7fff;
-      box-shadow: 0 0 0 4px rgba(77,127,255,0.25);
+      box-shadow: 0 0 0 4px rgba(77, 127, 255, 0.25);
     }
 
     .to-map-route::after {
@@ -347,7 +353,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(77,127,255,0.45);
+      box-shadow: 0 4px 20px rgba(77, 127, 255, 0.45);
     }
 
     .to-map-pin-dot i {
@@ -359,7 +365,7 @@
     .to-map-pin-shadow {
       width: 1.6rem;
       height: 0.6rem;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 50%;
       margin-top: 0.3rem;
       filter: blur(2px);
@@ -371,7 +377,7 @@
       bottom: 2rem;
       left: 2rem;
       background: rgba(20, 20, 26, 0.92);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 1rem;
       padding: 1.2rem 1.6rem;
       backdrop-filter: blur(8px);
@@ -401,7 +407,7 @@
     /* ── Activity log ──────────────────────────────────────── */
     .to-activity {
       padding: 2rem 2.2rem 2.4rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .to-activity-title {
@@ -417,7 +423,7 @@
       display: flex;
       gap: 1.4rem;
       padding: 0.9rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .to-log-item:last-child {
@@ -437,16 +443,14 @@
     }
 
     .to-log-icon.primary {
-      background: rgba(77,127,255,0.15);
+      background: rgba(77, 127, 255, 0.15);
       color: #4d7fff;
     }
 
     .to-log-icon.secondary {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
       color: #555;
     }
-
-    .to-log-body {}
 
     .to-log-time {
       font-size: 1.3rem;
@@ -473,7 +477,7 @@
 
     .to-card {
       background: #1a1a1e;
-      border: 1px solid rgba(255,255,255,0.07);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 1.6rem;
       padding: 2.4rem;
     }
@@ -491,7 +495,7 @@
       align-items: center;
       gap: 1.4rem;
       padding: 1.2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .to-ship-item:last-of-type {
@@ -541,7 +545,7 @@
       align-items: center;
       padding: 0.85rem 0;
       font-size: 1.35rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .to-price-line:last-of-type {
@@ -568,7 +572,7 @@
       align-items: center;
       padding: 1.6rem 0 0;
       margin-top: 0.6rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .to-total-label {
@@ -586,7 +590,7 @@
     /* need help card */
     .to-help-card {
       background: #1a1a1e;
-      border: 1px solid rgba(255,255,255,0.07);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 1.6rem;
       padding: 2.4rem;
       position: relative;
@@ -601,7 +605,7 @@
       top: 50%;
       transform: translateY(-50%);
       font-size: 6rem;
-      color: rgba(255,255,255,0.03);
+      color: rgba(255, 255, 255, 0.03);
       pointer-events: none;
     }
 
@@ -635,7 +639,7 @@
       font-weight: 600;
       padding: 1.2rem;
       border-radius: 0.9rem;
-      border: 1px solid rgba(77,127,255,0.25);
+      border: 1px solid rgba(77, 127, 255, 0.25);
       text-decoration: none;
       transition: background 0.2s, color 0.2s;
     }
@@ -859,7 +863,8 @@
 
             <div class="to-ship-item">
               <div class="to-ship-img">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=100&q=80" alt="PrimeX Wireless Headphones">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=100&q=80"
+                  alt="PrimeX Wireless Headphones">
               </div>
               <div>
                 <div class="to-ship-name">PrimeX Wireless Headphones</div>
@@ -870,7 +875,8 @@
 
             <div class="to-ship-item">
               <div class="to-ship-img">
-                <img src="https://images.unsplash.com/photo-1527443224154-c4a573d5f5ec?auto=format&fit=crop&w=100&q=80" alt="TechMaster 4K Monitor">
+                <img src="https://images.unsplash.com/photo-1527443224154-c4a573d5f5ec?auto=format&fit=crop&w=100&q=80"
+                  alt="TechMaster 4K Monitor">
               </div>
               <div>
                 <div class="to-ship-name">TechMaster 4K Monitor</div>
