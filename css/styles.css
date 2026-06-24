@@ -4892,7 +4892,7 @@ FOOTER RESPONSIVE
 
   .footer .row .row {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem 1.6rem;
   }
 
@@ -4928,10 +4928,10 @@ FOOTER RESPONSIVE
     row-gap: 2.6rem;
   }
 
-  .footer .row .row {
+  /* .footer .row .row {
     grid-template-columns: 1fr;
     gap: 2.2rem;
-  }
+  } */
 
   .footer-brand p,
   .footer li a {
