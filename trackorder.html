@@ -648,6 +648,146 @@
       background: #4d7fff;
       color: #fff;
     }
+
+    @media (max-width: 768px) {
+      .to-page {
+        padding: 2.6rem 0 4rem;
+      }
+
+      .to-breadcrumb {
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .to-title-row {
+        gap: 1.8rem;
+        margin-bottom: 2.4rem;
+      }
+
+      .to-title-row h1 {
+        font-size: 2.6rem;
+      }
+
+      .to-est-delivery {
+        width: 100%;
+        text-align: left;
+      }
+
+      .to-est-date {
+        font-size: 1.8rem;
+      }
+
+      .to-tracker-card,
+      .to-card,
+      .to-help-card {
+        padding: 2rem;
+      }
+
+      .to-map-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .to-map-last-seen {
+        right: 1.4rem;
+        bottom: 1.4rem;
+        left: 1.4rem;
+      }
+
+      .to-ship-item,
+      .to-total-row,
+      .to-price-line {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .to-title-row h1 {
+        font-size: 2.3rem;
+      }
+
+      .to-order-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .to-tracker-card,
+      .to-card,
+      .to-help-card {
+        border-radius: 1.1rem;
+        padding: 1.5rem;
+      }
+
+      .to-steps {
+        flex-direction: column;
+        gap: 1.8rem;
+      }
+
+      .to-steps::before {
+        top: 2.4rem;
+        bottom: 2.4rem;
+        left: 2.4rem;
+        right: auto;
+        width: 3px;
+        height: auto;
+      }
+
+      .to-steps::after {
+        top: 2.4rem;
+        left: 2.4rem;
+        width: 3px;
+        height: calc(50% - 1.2rem);
+      }
+
+      .to-step {
+        min-height: 5.2rem;
+        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 4.8rem minmax(0, 1fr);
+        column-gap: 1.4rem;
+      }
+
+      .to-step-icon {
+        grid-row: 1 / span 2;
+        margin-bottom: 0;
+      }
+
+      .to-step-label,
+      .to-step-date {
+        text-align: left;
+      }
+
+      .to-map-visual {
+        height: 20rem;
+      }
+
+      .to-map-pin-dot {
+        width: 4.4rem;
+        height: 4.4rem;
+      }
+
+      .to-ship-item {
+        display: grid;
+        grid-template-columns: 5rem minmax(0, 1fr);
+      }
+
+      .to-ship-price {
+        grid-column: 2;
+        margin-left: 0;
+      }
+
+      .to-total-row,
+      .to-price-line {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .to-total-val {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 

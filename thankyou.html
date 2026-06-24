@@ -574,6 +574,135 @@
         opacity: 0;
       }
     }
+
+    @media (max-width: 768px) {
+      .ty-hero {
+        padding: 4rem 0 3rem;
+      }
+
+      .ty-hero h1 {
+        font-size: 2.6rem;
+        line-height: 1.2;
+      }
+
+      .ty-hero p {
+        font-size: 1.35rem;
+      }
+
+      .ty-grid {
+        gap: 1.8rem;
+        padding-bottom: 4rem;
+      }
+
+      .ty-sidebar {
+        position: static;
+      }
+
+      .ty-card,
+      .ty-items-card,
+      .ty-info-card,
+      .ty-help-card,
+      .ty-delivery-banner {
+        padding: 1.8rem;
+      }
+
+      .ty-delivery-banner {
+        display: block;
+      }
+
+      .ty-delivery-banner-text ul {
+        align-items: flex-start !important;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .ty-progress-wrap {
+        padding: 0 1rem;
+      }
+
+      .ty-item {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .ty-check-circle {
+        width: 6.4rem;
+        height: 6.4rem;
+        margin-bottom: 1.8rem;
+        box-shadow: 0 0 0 0.7rem rgba(77, 127, 255, 0.1), 0 0 0 1.4rem rgba(77, 127, 255, 0.05);
+      }
+
+      .ty-check-circle i {
+        font-size: 3rem;
+      }
+
+      .ty-order-id-badge {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+
+      .ty-card,
+      .ty-items-card,
+      .ty-info-card,
+      .ty-help-card,
+      .ty-delivery-banner {
+        border-radius: 1rem;
+        padding: 1.5rem;
+      }
+
+      .ty-delivery-banner-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .ty-progress-wrap {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .ty-progress-label {
+        max-width: 6.2rem;
+        white-space: normal;
+        text-align: center;
+        font-size: 0.95rem;
+        line-height: 1.2;
+      }
+
+      .ty-progress-label[style*="100%"] {
+        transform: translateX(-100%) !important;
+      }
+
+      .ty-item {
+        display: grid;
+        grid-template-columns: 6.4rem minmax(0, 1fr);
+        gap: 1.2rem;
+      }
+
+      .ty-item-img {
+        width: 6.4rem;
+        height: 6.4rem;
+      }
+
+      .ty-item-price {
+        grid-column: 2;
+      }
+
+      .ty-total-row,
+      .ty-price-line {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .ty-total-val {
+        font-size: 2.2rem;
+      }
+
+      .ty-visa-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 
